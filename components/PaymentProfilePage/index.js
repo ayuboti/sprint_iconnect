@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import {PAYMENT_PROFILE_QUERY} from "./queries";
 import {graphql} from "react-apollo"
 import Loader from "../Loader";
@@ -32,7 +32,13 @@ class PaymentProfilePage extends React.PureComponent {
       return (
         <>
           <NextSeo title={"Add Payment Profile"}/>
-          <PaymentPhoneForm paymentProfile={paymentProfile}/>
+          <MDBContainer>
+            <MDBRow center>
+              <MDBCol size={"12"} md={"6"}>
+                <PaymentPhoneForm paymentProfile={paymentProfile}/>
+              </MDBCol>
+            </MDBRow>
+          </MDBContainer>
         </>
       )
     }

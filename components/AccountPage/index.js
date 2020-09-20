@@ -43,7 +43,7 @@ class AccountPage extends React.Component {
 
     const {paybillNumber, paybillAccount, phone} = paymentProfile;
 
-    const {name, monthlyPrice, commission} = plan;
+    const {name} = plan;
     return (
       <>
         <NextSeo title={"Account"}/>

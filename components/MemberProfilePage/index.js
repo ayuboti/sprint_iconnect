@@ -12,25 +12,27 @@ import {format_errors} from "../../_helpers";
 class MemberProfilePage extends React.PureComponent {
   state = {
     organisationName: "",
-    accountPassword: "",
     errors: {},
     submitted: false
   }
   getData = () => {
-    const {organisationName, accountPassword} = this.state;
+    const {organisationName} = this.state;
     let {data: {memberProfile}} = this.props;
     if (!memberProfile) memberProfile = {}
     return {
       organisationName: organisationName ? organisationName : memberProfile.organisationName,
-      accountPassword: accountPassword ? accountPassword : memberProfile.accountPassword
     }
   }
   completeHandler = ({editMemberProfile: {memberProfile, errors}}) => {
+    /**
+     * if the form filling was successful redirect to the account page
+     * else add the error to the state and set submitted to true so as
+     * to show them
+     * **/
     if (memberProfile) {
       return redirect('/member/account');
     }
     this.setState({errors: format_errors(errors), submitted: true})
-    console.log(this.state)
   }
   changeHandler = (object) => {
     this.setState(object)
@@ -42,9 +44,7 @@ class MemberProfilePage extends React.PureComponent {
   render() {
     const {data: {loading, error, memberProfile = {}}} = this.props
     if (loading) return <Loader/>
-
     if (error) return <h1>{error.message}</h1>
-
     // flag for whether the member Profile is new or not
     const newProfile = !memberProfile;
     // if new Profile show error alert on top
@@ -87,23 +87,6 @@ class MemberProfilePage extends React.PureComponent {
                   onChange={e => this.changeHandler({organisationName: e.target.value})}
                 />
               </MDBCol>
-              <MDBCol size={"12"}/>
-              {newProfile ?
-                <MDBCol size={"11"} md={"6"}>
-                  <small className={"mb-0 text-info italic-text"}>This is the password you will use to withdraw from
-                    your account</small>
-                  <Field
-                    type={"password"}
-                    submitted={submitted}
-                    initial={memberProfile ? memberProfile.accountPassword : ""}
-                    label={"Account Password"}
-                    className={"mt-0"}
-                    required
-                    fieldErrors={errors.account_password}
-                    onChange={e => this.changeHandler({accountPassword: e.target.value})}
-                  />
-                </MDBCol> : null
-              }
               <MDBCol size={"12"}/>
               <MDBCol size={"6"} className={"text-center"}>
                 <MDBBtn type={"submit"} size={"lg"} className={"rounded-pill"}>

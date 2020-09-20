@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const MEMBER_PROFILE_MUTATION = gql`
-  mutation MemberProfileMutation($organisationName:String!,$accountPassword:String!){
-    editMemberProfile(organisationName:$organisationName,accountPassword:$accountPassword){
+  mutation MemberProfileMutation($organisationName:String!){
+    editMemberProfile(organisationName:$organisationName){
       memberProfile{
         id
         organisationName
