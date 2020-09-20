@@ -1,12 +1,12 @@
 import React, {PureComponent} from "react";
 import {MDBBtn, MDBCol, MDBRow} from 'mdbreact';
-import {Field, FieldErrors} from "../FIeld";
-import {MutationForm} from "../Form";
+import {Field} from "../../FIeld";
+import {MutationForm} from "../../Form";
 import PropTypes from "prop-types"
-import {WALLET_QUERY} from "./queries";
+import {WALLET_QUERY} from "../queries";
 import WithdrawQueued from "./WithdrawQueued";
 
-export class MobileWithdrawForm extends PureComponent {
+export class PaybillWithdrawForm extends PureComponent {
   state = {
     amount: "",
     errors: {},
@@ -14,7 +14,7 @@ export class MobileWithdrawForm extends PureComponent {
     queued: false,
     transactionId: null
   }
-  completeHandler = ({withdrawPhone: {transaction, errors}}) => {
+  completeHandler = ({withdraw: {transaction, errors}}) => {
     if (transaction) {
       this.setState({
         queued: true,
@@ -23,6 +23,8 @@ export class MobileWithdrawForm extends PureComponent {
       return
     }
     this.setState({errors})
+    console.log(transaction)
+    console.log(errors)
   }
   onChange = object => {
     this.setState(object)
@@ -52,7 +54,6 @@ export class MobileWithdrawForm extends PureComponent {
         <div>
           <MDBRow className={"h-100"}>
             <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
-              <FieldErrors errors={errors.nonFieldErrors}/>
               <MutationForm data={this.getFormData()}
                             onCompleted={this.completeHandler}
                             mutation={mutation}
@@ -89,9 +90,8 @@ export class MobileWithdrawForm extends PureComponent {
   }
 }
 
-MobileWithdrawForm.propTypes = {
+PaybillWithdrawForm.propTypes = {
   mutation: PropTypes.any.isRequired,
   initial: PropTypes.object,
-  paymentProfile: PropTypes.object.isRequired,
   balance: PropTypes.number.isRequired,
 };

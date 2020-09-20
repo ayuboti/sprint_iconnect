@@ -1,9 +1,9 @@
 import React from 'react'
 import {MDBAlert, MDBAnimation, MDBCol, MDBContainer, MDBRow} from "mdbreact";
-import Loader from "../Loader";
+import Loader from "../../Loader";
 import PropTypes from "prop-types";
 import {graphql} from 'react-apollo'
-import {WITHDRAW_SUBSCRIPTION} from "./queries";
+import {WITHDRAW_SUBSCRIPTION} from "../queries";
 import compose from "lodash.flowright";
 
 class WithdrawQueued extends React.PureComponent {
