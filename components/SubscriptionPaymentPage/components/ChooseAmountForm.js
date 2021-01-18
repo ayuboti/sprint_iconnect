@@ -3,27 +3,28 @@ import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBListGroup, MDBListGr
 import PropTypes from "prop-types";
 
 const ChooseAmountItem = props => {
-  const {title, number, onChange, interval, maxNumber, onSelect, price} = props
+  const {title, number, onChange, interval, maxNumber, onSelect, price, duration} = props
 
   const amount = number * price
   return (
     <MDBListGroupItem className={"rounded border-0 my-2 z-depth-1"}>
       <MDBRow center>
         <MDBCol size={"12"}>
-          <h3>{title} <small>@ Ksh.{price} {interval}</small></h3>
+          <h3>{title} <small>@ Ksh.{price} per {duration}</small></h3>
         </MDBCol>
-        <MDBCol size={"12"} md={"6"}>
+        <MDBCol size={"12"} md="7">
           <MDBInput
             valueDefault={"1"}
             min="1"
             max={maxNumber}
             type={"number"}
-            label={"Number"}
+            label={`Number of ${duration}s`}
             value={number.toString()}
             onChange={onChange(interval)}/>
         </MDBCol>
-        <MDBCol size={"12"} md={"4"}>
+        <MDBCol size={"12"} md={"6"}>
           <MDBBtn
+            size="lg"
             onClick={onSelect(interval, (price * number).toString())}
             className={"rounded-pill float-left w-100"}>
             <MDBIcon icon={"money-bill"} className={"mx-2"}/>
@@ -73,6 +74,7 @@ class ChooseAmountForm extends React.PureComponent {
                                   number={this.state.daily}
                                   onChange={this.changeHandler}
                                   interval={"daily"}
+                                  duration={"day"}
                                   maxNumber={"4"}
                                   onSelect={this.selectHandler}
                                   price={dailyPrice}/>
@@ -83,6 +85,7 @@ class ChooseAmountForm extends React.PureComponent {
                                   number={this.state.weekly}
                                   onChange={this.changeHandler}
                                   interval={"weekly"}
+                                  duration={"week"}
                                   maxNumber={"4"}
                                   onSelect={this.selectHandler}
                                   price={weeklyPrice}/>
@@ -93,6 +96,7 @@ class ChooseAmountForm extends React.PureComponent {
                                   number={this.state.monthly}
                                   onChange={this.changeHandler}
                                   interval={"monthly"}
+                                  duration={"month"}
                                   maxNumber={"4"}
                                   onSelect={this.selectHandler}
                                   price={monthlyPrice}/>
@@ -103,6 +107,7 @@ class ChooseAmountForm extends React.PureComponent {
                                   number={this.state.yearly}
                                   onChange={this.changeHandler}
                                   interval={"yearly"}
+                                  duration={"year"}
                                   maxNumber={"4"}
                                   onSelect={this.selectHandler}
                                   price={yearlyPrice}/>

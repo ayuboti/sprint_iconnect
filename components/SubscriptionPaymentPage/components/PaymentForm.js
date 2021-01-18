@@ -1,11 +1,13 @@
 import React from "react";
 import {MDBBtn, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import PropTypes from "prop-types";
+import {withRouter} from "next/router";
 import compose from 'lodash.flowright'
 import {graphql} from "react-apollo";
 import {SUBSCRIPTION_PAYMENT_MUTATION} from "../queries";
 import PaymentPending from "./PaymentPending";
 import Loader from "../../Loader";
+import {router} from "next/router"
 
 class PaymentForm extends React.PureComponent {
   constructor(props) {
@@ -14,8 +16,6 @@ class PaymentForm extends React.PureComponent {
       phone: "",
       loading: false,
       errors: [],
-      paymentPending: false,
-      transactionId: null
     }
     this.defaultState = this.state
   }
@@ -42,10 +42,9 @@ class PaymentForm extends React.PureComponent {
           return
         }
         if (paymentPending) {
-          this.setState({
-            paymentPending: true,
-            transactionId: transaction.id
-          })
+          this.props.router.push(
+            "/subscriber/transactions/[id]",
+            `/subscriber/transactions/${transaction.id}`);
         }
       }
     )
@@ -67,10 +66,8 @@ class PaymentForm extends React.PureComponent {
   }
 
   render() {
-    const {errors, paymentPending} = this.state;
+    const {errors} = this.state;
 
-    if (paymentPending)
-      return <PaymentPending nextStep={this.nextStep} transactionId={this.state.transactionId}/>
     const inputErrors = errors.map(
       (error, key) => (
         <div key={key} className="invalid-feedback">
@@ -83,11 +80,30 @@ class PaymentForm extends React.PureComponent {
 
 
     return (
-      <form onSubmit={this.submitHandler}>
-        <p>
-          Input the phone number which you will use to pay the money .e.g 07xxxxxxxx
+      <form onSubmit={this.submitHandler} className="mb-5">
+        <div className={"text-center"}>
+          <img
+            className={"text-center mx-auto"}
+            alt={"M Pesa Logo"}
+            src={"/images/mpesa-logo.svg"}
+            style={{
+              width: 100,
+              height: 100
+            }}/>
+        </div>
+        <h3 className={"text-center"}>Lipa na M-pesa</h3>
+        <h6 className={"text-center text-muted"}>Amount : Ksh.{this.props.amount}</h6>
+        <p className="text-center">
+          Enter below the <strong>safaricom</strong> phone number which you will use to pay .e.g
+          <strong className="text-danger"> 07xxxxxxxx</strong>.
+          <br/>
+          <strong>
+            Hold your phone and unlock it and wait for the payment screen to appear on your phone.
+          </strong>
+          <br/>
+          Then you can now click on the pay button below and follow instructions on the payment screen
         </p>
-        <MDBRow>
+        <MDBRow center>
           <MDBCol size={"12"} md={"10"}>
             <MDBRow center>
               <MDBCol size={"11"} md={"6"}>
@@ -96,10 +112,9 @@ class PaymentForm extends React.PureComponent {
                   type={"text"}
                   required
                   disabled={this.state.loading}
-                  label={"Enter Your phone number"}
+                  label={"Phone number"}
                   onChange={this.changeHandler}
-                  className={validClass + " " + invalidClass}
-                >
+                  className={validClass + " " + invalidClass}>
                   {inputErrors}
                   <div className={"valid-feedback"}>Valid Phone Number!!</div>
                 </MDBInput>
@@ -119,7 +134,6 @@ class PaymentForm extends React.PureComponent {
       </form>
     )
   }
-
 }
 
 
@@ -131,6 +145,8 @@ PaymentForm.propTypes = {
   frequency:PropTypes.string.isRequired,
 }
 
-export default compose(
-  graphql(SUBSCRIPTION_PAYMENT_MUTATION, {name: 'paySubscription'})
-)(PaymentForm)
+export default withRouter(
+  compose(
+    graphql(SUBSCRIPTION_PAYMENT_MUTATION, {name: 'paySubscription'})
+  )(PaymentForm)
+)

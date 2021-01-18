@@ -9,6 +9,8 @@ import {StepContainer, StepItem} from "./components";
 import ChooseAmountForm from "./components/ChooseAmountForm";
 import PaymentLoginForm from "./components/PaymentLoginForm";
 import {SUBSCRIPTION_QUERY} from "./queries";
+import CreatorLogin from "./components/CreatorLogin";
+
 
 class SubscriptionPaymentPage extends React.PureComponent {
   state = {
@@ -59,17 +61,20 @@ class SubscriptionPaymentPage extends React.PureComponent {
 
   render() {
     const {data: {error, loading, subscription, user}} = this.props;
-    if (error)
-      return <h1>{error.message}</h1>
-
-    if (loading)
-      return <Loader/>
-    if (!subscription)
-      return <h1>NO SUBSCRIPTION CONFIGURED</h1>
-
+    // show error page
+    if (error) return <h1>{error.message}</h1>;
+    if (loading) return <Loader/>;
+    // show 404 page
+    if (!subscription) return <h1>NO SUBSCRIPTION CONFIGURED</h1>
+    // ban creator from paying their own subscription
+    if (user){
+      const isCreator = subscription.user.email === user.email
+      if (isCreator) return <CreatorLogin/>;
+    }
     return (
       <MDBContainer fluid>
-        <h1 className="text-center text-capitalize">Pay for {subscription.name}</h1>
+        <h1 className="text-center">Payment Form</h1>
+        <h2 className="text-center text-lowercase text-muted">{subscription.name}</h2>
         <MDBRow>
           <MDBCol size={"12"}>
             <StepContainer>
@@ -82,13 +87,9 @@ class SubscriptionPaymentPage extends React.PureComponent {
               </StepItem>
               <StepItem id={"amount"}
                         toggle={this.toggleCollapse}
-                        name={"Set Payment Amount"}
+                        name={"Choose payment subscription and duration"}
                         currentID={this.state.collapseID}
                         icon={className => (<MDBIcon icon={"edit"} className={className}/>)}>
-                <p>
-                  Input the amount of money you want to pay for this course.
-                  Which will be charged at the rate of {subscription.price} Per Week.
-                </p>
                 <ChooseAmountForm subscription={subscription}
                                   onChange={this.changeHandler}
                                   nextStep={this.nextStep('amount')}/>
