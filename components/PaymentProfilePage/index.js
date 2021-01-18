@@ -82,18 +82,6 @@ class PaymentProfilePage extends React.PureComponent {
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
-            <MDBCol size={"12"} md={"6"} className={"mt-3"}>
-              <MDBCard style={{borderRadius: "1rem"}} className={"h-100"}>
-                <MDBCardTitle className={"text-dark p-3 border-bottom"}>Paybill Information</MDBCardTitle>
-                <MDBCardBody className={"text-center"}>
-                  <p>CURRENT PAYBILL NUMBER :N/A</p>
-                  <p>CURRENT PAYBILL ACCOUNT :N/A</p>
-                  <MDBBtn className={"rounded-pill mt-4"}>
-                    SET PAYBILL
-                  </MDBBtn>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
           </MDBRow>
         </MDBContainer>
       </>
