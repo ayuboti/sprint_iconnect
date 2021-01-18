@@ -9,11 +9,11 @@ import {withRouter} from "next/router";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 
 class SubscriptionsPage extends React.PureComponent {
-
   constructor(props) {
     super(props);
     this.state = {
-      query: this.props.router.query.search
+      query: this.props.router.query.search,
+      hasMore:true,
     }
   }
 
@@ -32,7 +32,24 @@ class SubscriptionsPage extends React.PureComponent {
       query: e.target.value
     })
   }
-
+  loadMore = (fromItem) =>{
+    const {search} = this.props.router.query;
+    this.props.data.fetchMore({
+      variables: {
+        query: search,
+        number:10,
+        fromItem
+      },
+      // concatenate old and new entries
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const addedSubscriptions = fetchMoreResult.subscriptions;
+        if (addedSubscriptions.length < 1){
+          this.setState({hasMore:false})
+        }
+        return { subscriptions: [...previousResult.subscriptions,...addedSubscriptions]}
+      },
+    });
+  }
   render() {
     const {data: {loading, error, subscriptions}} = this.props;
 
@@ -62,6 +79,17 @@ class SubscriptionsPage extends React.PureComponent {
           </MDBRow>
         </form>
         <SubscriptionListSection subscriptions={subscriptions}/>
+        {this.state.hasMore ?
+            (<MDBCol size="12" className="mt-2 mb-2 pt-3 text-center">
+              <MDBBtn
+                onClick={()=>this.loadMore(subscriptions.length)}
+                color={"white"}
+                className={"rounded-pill mt-5"} >
+                More Subscriptions
+                <MDBIcon icon={'angle-down'} className={"mx-2"}/>
+              </MDBBtn>
+            </MDBCol>):null
+          }
       </MDBContainer>
     )
   };
@@ -76,7 +104,9 @@ export default withRouter(
           const {search} = props.router.query;
           return {
             variables: {
-              query: search
+              query: search,
+              number:12,
+              fromItem:0
             }
           }
         }
