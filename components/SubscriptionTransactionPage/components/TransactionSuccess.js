@@ -34,7 +34,7 @@ class TransactionSuccess extends React.PureComponent {
     clearTimeout(this.runConfetti);
   }
   render(){
-    const {transaction:{userSubscription:{subscription}}} = this.props;
+    const {transaction:{userSubscription:{subscription:{id,name}},amount}} = this.props;
     return(
       <div>
         <MDBContainer>
@@ -42,14 +42,16 @@ class TransactionSuccess extends React.PureComponent {
             <h1 className="text-muted">Payment Successfull</h1>
             <MDBIcon far icon="grin-beam" className=" my-4 text-muted" size="4x" />
             <Confetti active={this.state.active} config={ config }/>
-            <h4>Thank you for making this world a better place.</h4>
-            <p> Encourage your friends and family to donate to the campaigns you support.</p>
+            <p>We have received and processed your Payment of
+            <strong> Ksh.{amount} </strong> to
+            <strong className="text-lowercase"> {name}</strong>
+            </p>
           </div>
           <MDBRow center>
             <MDBCol size="12" md="6">
               <h1 className="text-center">
                 <Link href={"/subscriber/subscriptions/[subscriptionId]"}
-                      as={`/subscriber/subscriptions/${subscription.id}`}>
+                      as={`/subscriber/subscriptions/${id}`}>
                   <MDBBtn className="rounded-pill text-center">
                     <MDBIcon icon="link"/> View Subscription
                   </MDBBtn>
