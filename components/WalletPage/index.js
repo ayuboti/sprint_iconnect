@@ -120,9 +120,7 @@ class WalletPage extends React.PureComponent {
                       <th>Amount</th>
                       <th>State</th>
                       <th>Transaction Date</th>
-                      <tr>
                       <th>Transaction Cost</th>
-                    </tr>
                   </MDBTableHead>
                   <MDBTableBody>
                     {transactionList}
