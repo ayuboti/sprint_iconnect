@@ -140,9 +140,9 @@ class PaymentForm extends React.PureComponent {
 PaymentForm.propTypes = {
   subscription: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  amount: PropTypes.string.isRequired,
-  interval: PropTypes.string.isRequired,
-  frequency:PropTypes.string.isRequired,
+  amount: PropTypes.any.isRequired,
+  interval: PropTypes.any.isRequired,
+  frequency:PropTypes.number.isRequired,
 }
 
 export default withRouter(

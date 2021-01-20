@@ -1,14 +1,16 @@
 import React from "react";
-import Loader from "../Loader";
 import compose from "lodash.flowright"
 import {graphql} from "react-apollo";
 import {SUBSCRIPTION_QUERY} from "./queries";
 import {withRouter} from "next/router";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
-import SubscribersSection from "./SubscribersSection";
+import SubscribersSection from "./components/SubscribersSection";
 import AdminCard from "../AdminCard";
 import Link from "next/link";
 import {NextSeo} from "next-seo";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
+import NotFoundPage from "../404Page";
 
 class SubscriptionPage extends React.PureComponent {
   state = {
@@ -21,18 +23,12 @@ class SubscriptionPage extends React.PureComponent {
 
   render() {
     const {data: {loading, error, subscription}} = this.props;
-    if (loading)
-      return <Loader/>
-    if (error)
-      return <h1>ERROR {error.message}</h1>
-    if (!subscription)
-      return <h1>No Subscription Found</h1>
-
+    if (loading) return <Loader/>;
+    if (error)return <ErrorPage message={error.message} />
+    if (!subscription) return <NotFoundPage/>
     const {id, name, isOwner} = subscription;
+    if (!isOwner) return <NotFoundPage/>
 
-    if (!isOwner) {
-      return <h1>This Subscription Not Yours</h1>
-    }
     const paymentLink = `${window.location.origin}/subscriber/subscriptions/${id}/pay`;
 
     return (

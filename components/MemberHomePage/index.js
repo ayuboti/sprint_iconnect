@@ -1,33 +1,24 @@
-import React, {PureComponent} from 'react'
-import HomeLanding from "./components/HomeLanding";
+import React from 'react'
 import {graphql} from "react-apollo";
-import {APP_QUERY} from "../app/queries";
-import Loader from '../Loader'
-import HomeUserPage from "./components/HomeUserPage";
 import {NextSeo} from "next-seo";
 import compose from "lodash.flowright";
 
-class HomePage extends PureComponent {
+import {APP_QUERY} from "../app/queries";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
+import HomeUserPage from "./components/HomeUserPage";
+import HomeLanding from "./components/HomeLanding";
+
+
+class HomePage extends React.PureComponent {
   render() {
-    const {data: {loading, error, user}} = this.props
-
-    if (loading)
-      return <Loader/>
-
-    if (error)
-      return <h1>{error.message}</h1>
-
-    if (user)
-      return (
-        <>
-          <NextSeo title={"Member"}/>
-          <HomeUserPage/>
-        </>
-      )
+    const {data: {loading, error, user}} = this.props;
+    if (loading) return <Loader/>;
+    if (error) return <ErrorPage message={error.message} />
     return (
       <>
         <NextSeo title={"Member"}/>
-        <HomeLanding/>
+        {user ? <HomeUserPage/> : <HomeLanding/>}
       </>
     )
   }

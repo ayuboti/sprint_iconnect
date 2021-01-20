@@ -1,22 +1,19 @@
 import React from 'react'
 import {graphql} from 'react-apollo';
-import Loader from "../Loader";
-import {APP_QUERY} from "../app/queries";
 import {SUBSCRIPTIONS_QUERY} from "./queries";
-import SubscriptionListSection from "./SubscriptionListSection";
+import {APP_QUERY} from "../app/queries";
+import SubscriptionListSection from "./components/SubscriptionListSection";
 import compose from "lodash.flowright"
 import {NextSeo} from "next-seo";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class SubscriptionsPage extends React.PureComponent {
 
   render() {
     const {data: {loading, error, user}} = this.props;
-
     if (loading) return <Loader/>;
-
-    // if error  return null
-    //TODO:create an error page
-    if (error) return <h1>{error.message}</h1>;
+    if (error) return <ErrorPage message={error.message} />
 
     return (
       <>

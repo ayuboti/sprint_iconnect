@@ -1,29 +1,15 @@
 import React from 'react'
 import {MDBBtn, MDBCard, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
-import Loader from "../../Loader";
-import {APP_QUERY} from "../../app/queries";
 import Link from "next/link";
+import PropTypes from "prop-types";
 
 class HomeUserPage extends React.Component {
 
   render() {
-    const {
-      data: {
-        loading,
-        error,
-        user
-      }
-    } = this.props;
-    if (loading) return <Loader/>;
-
-    // if error  return null
-    //TODO:create an error page
-    if (error) return null;
-
+    const {user} = this.props;
     const {email, firstName, lastName} = user;
     const fullName = `${firstName} ${lastName}`;
-
     return (
       <>
         <MDBContainer className={"py-3 px-3"}>
@@ -87,7 +73,8 @@ class HomeUserPage extends React.Component {
   };
 }
 
-export default graphql(
-  APP_QUERY,
-  //coursesQuery
-)(HomeUserPage);
+HomeUserPage.PropTypes ={
+  user:PropTypes.object.isRequired
+}
+
+export default HomeUserPage

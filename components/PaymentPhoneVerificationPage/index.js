@@ -1,6 +1,5 @@
 import React from "react";
 import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
-import Loader from "../Loader";
 import {NextSeo} from "next-seo";
 import {redirect} from "../app/components";
 import {graphql} from "react-apollo";
@@ -10,6 +9,8 @@ import {PAYMENT_PROFILE_QUERY} from "../PaymentProfilePage/queries";
 import ChangePaymentPhoneModal from "../PaymentProfilePage/ChangePaymentPhoneModal";
 import compose from 'lodash.flowright';
 import {RESEND_VERIFICATION_CODE_MUTATION} from "./queries";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class PaymentPhoneVerificationPage extends React.PureComponent {
   state = {
@@ -40,8 +41,7 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
   render() {
     const {data: {loading, error, paymentProfile}} = this.props
     if (loading) return <Loader/>
-
-    if (error) return <h1>{error.message}</h1>
+    if (error) return <ErrorPage message={error.message} />
 
     if (!paymentProfile)
       return redirect('/member/account/payment')
@@ -61,7 +61,6 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
       )
     }
 
-    const {changePhone} = this.state;
     return (
       <>
         <NextSeo title={"Verify Payment Phone"}/>
@@ -75,6 +74,7 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
                 <MDBAlert color={"info"} className={"z-depth-1"}>
                   Check your phone ({paymentProfile.phone}) for message from AFRIKAS TALKING
                   and enter the code below
+                  const {changePhone} = this.state;
                 </MDBAlert>
               </MDBAnimation>
               {this.state.alerts.map(

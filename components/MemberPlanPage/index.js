@@ -2,16 +2,18 @@ import React from "react";
 import {MDBBtn, MDBCard, MDBCardHeader, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
 import {graphql} from "react-apollo";
 import {MEMBER_PLAN_QUERY} from "./queries";
-import Loader from "../Loader";
 import {MemberPlanPricing} from "./components";
 import {ExpiryCountDown} from "../SubscriberSubscriptionPage";
 import Link from "next/link";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class MemberPlanPage extends React.Component {
   render() {
-    const {data: {loading, error, pricing, user}} = this.props
+    const {data: {loading, error, pricing, user}} = this.props;
     if (loading) return <Loader/>;
-    if (error) return <h1>{error.message}</h1>;
+    if (error) return <ErrorPage message={error.message} />;
+
     const {free, basic, premium} = pricing;
     const {plan} = user;
     return (

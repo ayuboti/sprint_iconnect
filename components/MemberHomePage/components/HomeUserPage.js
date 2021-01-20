@@ -1,12 +1,13 @@
 import React from 'react'
 import {MDBAnimation, MDBCard, MDBCol, MDBContainer, MDBRow} from 'mdbreact'
-import Loader from "../../Loader";
-import AdminCard from "../../AdminCard";
-import RevenueChart from "./RevenueChart";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
-import {APP_QUERY} from "../../app/queries";
+
+import AdminCard from "../../AdminCard";
+import RevenueChart from "./RevenueChart";
 import {MEMBER_HOME_QUERY} from "../queries";
+import Loader from "../../Loader";
+import ErrorPage from "../../ErrorPage";
 
 class HomeUserPage extends React.Component {
 
@@ -18,10 +19,7 @@ class HomeUserPage extends React.Component {
       }
     } = this.props;
     if (loading) return <Loader/>;
-
-    // if error  return null
-    //TODO:create an error page
-    if (error) return null;
+    if (error) return <ErrorPage message={error.message}/>;
 
     return (
       <MDBAnimation type={"fadeIn"}>
@@ -66,7 +64,5 @@ class HomeUserPage extends React.Component {
 }
 
 export default compose(
-  //graphql(REVENUE_DATA_QUERY),
-  graphql(APP_QUERY),
   graphql(MEMBER_HOME_QUERY),
 )(HomeUserPage);

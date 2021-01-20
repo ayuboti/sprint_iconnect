@@ -9,7 +9,7 @@ import {graphql} from "react-apollo";
 import {loginWithGoogle} from "../queries";
 import GoogleButton from "./GoogleButton";
 
-const {client_id} = GOOGLE_CONFIG;
+const {client_id,scope} = GOOGLE_CONFIG;
 
 
 class LoginForm extends React.PureComponent {
@@ -19,9 +19,7 @@ class LoginForm extends React.PureComponent {
   }
 
   onFail = (data) => {
-    const errors = [
-      'User did not Login.Please try again'
-    ]
+    const errors = ['An Error has occured.Please try again']
     this.setState({errors})
   }
   responseGoogle = ({accessToken,profileObj:{imageUrl}}) => {
@@ -47,41 +45,38 @@ class LoginForm extends React.PureComponent {
       }
     );
   };
-
-  render() {
-    const nonFieldErrors = this.state.errors ?
-      this.state.errors.map(
-        (error, key) => {
-
-          if (error.field === undefined) return (
-            <MDBAnimation type={"fadeInDown"}>
-              <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
+  getErrors = () =>{
+    if (!this.state.errors)
+      return null
+    return this.state.errors.map(
+      (error, key) => {
+        if (error.field === undefined) return (
+          <MDBAnimation type={"fadeInDown"} key={key}>
+            <MDBAlert  color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
+          </MDBAnimation>
+        )
+        return error.errors.map(
+          (error, key) => (
+            <MDBAnimation type={"fadeInDown"} key={key}>
+              <MDBAlert color={"danger"} className={"text-center z-depth-1 mb-4"}>
+                {error}
+              </MDBAlert>
             </MDBAnimation>
           )
-          return error.errors.map(
-            (error, key) => (
-              <MDBAnimation type={"fadeInDown"}>
-                <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>
-                  {error}
-                </MDBAlert>
-              </MDBAnimation>
-            )
-          )
-        }
-      ) : null;
+        )
+      }
+    )
+  }
+  render() {
     const {loading} = this.state;
-    let {scope} = this.props;
 
-    if (!scope) {
-      scope = GOOGLE_CONFIG.scope
-    }
     return (
       <>
         <MDBRow className={"h-100"} center>
           <MDBCol size={"11"}
                   md="6" lg={"5"} className={"m-auto z-depth-1 bg-white"}
                   style={{borderRadius: "1rem"}}>
-            {nonFieldErrors}
+            {this.getErrors()}
             <div className={"p-3"}>
               <h2 className={"text-center text-dark"}>Sign In With Google</h2>
               <div className={"d-flex justify-content-right mt-4 mb-5 ml-3"}>

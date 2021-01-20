@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {MDBAnimation, MDBCol, MDBRow} from "mdbreact";
-import {NextSeo} from "next-seo"
 import MemberSideNav, {NavSmall} from "./MemberSideNav";
 import Loader from "../../Loader";
 import {graphql} from "react-apollo";
 import {APP_QUERY} from "../queries";
 import {redirect} from "./index";
 import {withRouter} from "next/router";
+import ErrorPage from "../../ErrorPage";
 
 
 class MemberLayout extends React.Component {
@@ -24,21 +24,23 @@ class MemberLayout extends React.Component {
   };
 
   render() {
-    const {title, secure, data: {user, memberProfile, paymentProfile, loading, error}} = this.props;
+    const {
+      secure,
+      data: {user, memberProfile, paymentProfile, loading, error},
+      router: {pathname}
+    } = this.props;
     if (loading) return <Loader fullScreen={true}/>;
-    if (error) return <h1 className={"text-center"}>{error.message}</h1>;
+    if (error) return <ErrorPage message={error.message}/>;
     if (!user && secure) return redirect("/member/login", true);
-    const {router: {pathname}} = this.props;
     // check if the user has a member profile and if not
     // redirect the user to set it
-    if (!memberProfile && (pathname !== '/member/account/member-profile') && user) {
+    if (!memberProfile && (pathname !== '/member/account/member-profile') && user)
       return redirect('/member/account/member-profile')
-    }
     // check if payment profile and member profile is set if not
     // redirect to page where the account payment will be set
-    if (!paymentProfile && (pathname !== '/member/account/payment') && user && memberProfile) {
+    if (!paymentProfile && (pathname !== '/member/account/payment') && user && memberProfile)
       return redirect('/member/account/payment')
-    }
+
     // make sure payment phone is verified
     if (paymentProfile && (pathname !== '/member/account/payment/verify-phone') && user && memberProfile) {
       if (!paymentProfile.phoneVerified)
@@ -46,7 +48,6 @@ class MemberLayout extends React.Component {
     }
     return (
       <>
-        <NextSeo title={title}/>
         <MDBAnimation type={"fadeIn"}>
           <NavSmall toggleFunction={this.toggleFunction}/>
           <div className={"overflow-hidden"}>

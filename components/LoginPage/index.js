@@ -22,7 +22,8 @@ class LoginPage extends PureComponent {
       <MDBContainer>
         <NextSeo
           title={`${heading} Login`}
-          description={"Login to your m subscriber account no in one click all you need is a google account"}
+          description={"Login to your m subscriber account no in one click all "+
+                       "you need is a google account"}
         />
         <LoginForm redirectUrl={redirectUrl}/>
       </MDBContainer>

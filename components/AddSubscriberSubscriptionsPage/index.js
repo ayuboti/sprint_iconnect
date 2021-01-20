@@ -1,12 +1,13 @@
 import React from 'react'
 import {graphql} from 'react-apollo';
-import Loader from "../Loader";
-import {SUBSCRIPTIONS_QUERY} from "./queries";
-import SubscriptionListSection from "./SubscriptionListSection";
 import compose from "lodash.flowright"
 import {NextSeo} from "next-seo";
 import {withRouter} from "next/router";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdbreact";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
+import {SUBSCRIPTIONS_QUERY} from "./queries";
+import SubscriptionListSection from "./components/SubscriptionListSection";
 
 class SubscriptionsPage extends React.PureComponent {
   constructor(props) {
@@ -52,12 +53,8 @@ class SubscriptionsPage extends React.PureComponent {
   }
   render() {
     const {data: {loading, error, subscriptions}} = this.props;
-
     if (loading) return <Loader/>;
-
-    // if error  return null
-    //TODO:create an error page
-    if (error) return <h1>{error.message}</h1>;
+    if (error) return <ErrorPage message={error.message}/>;
 
     return (
       <MDBContainer className={"pt-4"}>

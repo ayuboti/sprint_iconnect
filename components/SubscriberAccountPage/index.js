@@ -3,6 +3,7 @@ import {MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
 import {USER_QUERY} from "./queries";
 import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 import {AccountCard} from "../AccountPage";
 
 
@@ -14,7 +15,7 @@ class AccountPage extends React.Component {
     if (loading) return <Loader/>;
     // if error  return null
     //TODO:create an error page
-    if (error) return <h1>{error.message}</h1>;
+    if (error) return <ErrorPage/>;
 
     const {email, firstName, lastName} = user;
 

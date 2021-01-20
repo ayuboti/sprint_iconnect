@@ -6,10 +6,11 @@ import {withRouter} from "next/router";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
 import {EDIT_SUBSCRIPTION_MUTATION, SUBSCRIPTION_QUERY} from "./queries";
-import Loader from "../Loader";
 import {SUBSCRIPTIONS_QUERY} from "../SubscriptionsPage/queries";
 import {NextSeo} from "next-seo";
 import {format_errors} from "../../_helpers";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class SubscriptionEditPage extends React.PureComponent {
 
@@ -68,11 +69,8 @@ class SubscriptionEditPage extends React.PureComponent {
 
   render() {
     const {data: {error, loading, subscription}} = this.props;
-
-    if (error) return <h1>{error.message}</h1>
-
-    if (loading)
-      return <Loader/>
+    if (error) return <ErrorPage message={error.message}/>;
+    if (loading)return <Loader/>
 
     const {submitted, errors} = this.state;
     return (

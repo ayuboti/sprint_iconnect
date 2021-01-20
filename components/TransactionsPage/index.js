@@ -1,9 +1,10 @@
 import React from "react"
 import {graphql} from "react-apollo"
-import Loader from "../Loader";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
 import {TRANSACTIONS_QUERY} from "./queries";
 import {withRouter} from "next/router";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class TransactionsPage extends React.PureComponent {
   constructor(props) {
@@ -33,8 +34,7 @@ class TransactionsPage extends React.PureComponent {
   render() {
     const {data: {error, loading, subscriptionTransactions}} = this.props;
     if (loading) return <Loader/>
-
-    if (error) return <h1>{error.message}</h1>
+    if (error) return <ErrorPage message={error.message}/>
 
     const subscriptionList = subscriptionTransactions.map(
       ({mpesaCode, amount, phone, state, userSubscription: {subscription, email, name}}, key) => {
@@ -111,4 +111,5 @@ export default withRouter(
           }
         }
       }
-    })(TransactionsPage))
+    }
+  )(TransactionsPage))

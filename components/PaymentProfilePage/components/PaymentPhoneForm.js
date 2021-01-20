@@ -1,10 +1,11 @@
 import React from "react";
 import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdbreact";
-import {MutationForm} from "../Form";
-import {PAYMENT_PROFILE_MUTATION, PAYMENT_PROFILE_QUERY} from "./queries";
-import {Field} from "../FIeld";
-import {format_errors} from "../../_helpers";
 import Link from "next/link";
+
+import {MutationForm} from "../../Form";
+import {PAYMENT_PROFILE_MUTATION, PAYMENT_PROFILE_QUERY} from "../queries";
+import {Field} from "../../FIeld";
+import {format_errors} from "../../../_helpers";
 
 export default class PaymentPhoneForm extends React.PureComponent {
   state = {

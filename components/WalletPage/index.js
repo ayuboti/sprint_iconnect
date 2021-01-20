@@ -13,12 +13,13 @@ import {
   MDBTableBody,
   MDBTableHead
 } from "mdbreact";
-import Loader from "../Loader";
 import AdminCard from "../AdminCard";
 import WithdrawModal from "./components/WithdrawModal";
 import {WALLET_QUERY} from "./queries";
 import Link from "next/link";
 import {NextSeo} from "next-seo";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class WalletPage extends React.PureComponent {
   state = {
@@ -33,7 +34,7 @@ class WalletPage extends React.PureComponent {
   render() {
     const {data: {loading, error, wallet, paymentProfile}} = this.props;
     if (loading) return <Loader/>;
-    if (error) return <h1>{error.message}</h1>;
+    if (error) return <ErrorPage message={error.message}/>;
 
     const transactionList = wallet.transactions.map(
       ({id, amount, transactionDate, transactionCost, state}, key) => {
@@ -116,10 +117,10 @@ class WalletPage extends React.PureComponent {
                 <h1>Withdraw Transactions</h1>
                 <MDBTable responsive>
                   <MDBTableHead>
-                    <tr>
                       <th>Amount</th>
                       <th>State</th>
                       <th>Transaction Date</th>
+                      <tr>
                       <th>Transaction Cost</th>
                     </tr>
                   </MDBTableHead>

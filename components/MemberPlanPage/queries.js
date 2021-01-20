@@ -28,6 +28,6 @@ query MemberPlanQuery{
       monthlyPrice
       commission
     }
-  }  
+  }
 }
 `

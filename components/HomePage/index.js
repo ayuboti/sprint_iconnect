@@ -3,25 +3,27 @@ import {MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import Link from "next/link";
 import {NextSeo} from "next-seo";
 import Jumbotron from "../Jumbotron";
-import FeatureSection from "./FeatureSection";
-import PricingSection from "./PricingSection";
-import ContactSection from "./ContactSection";
+import FeatureSection from "./components/FeatureSection";
+import PricingSection from "./components/PricingSection";
+import ContactSection from "./components/ContactSection";
+import TeamSection from "./components/TeamSection";
 
 class HomePage extends PureComponent {
   render() {
+    const description = " M-Subscribe is a platform bridges customer and businesses by giving businesses the ability to give their"+
+    "customers the power to manage their subscriptions from anywhere."
     return (
       <>
-        <NextSeo title={"Home"}/>
+        <NextSeo
+          title={"Home"}
+          description={description}/>
         <Jumbotron>
           <div style={{height: "67px"}}/>
           <MDBContainer>
             <div className="text-left">
               <h1 className={"text-center"}>M-Subscribe</h1>
               <p style={{fontSize: "1.1rem"}} className={'text-center'}>
-                M-Subscribe is a platform bridges customer and businesses by giving businesses the ability to give their
-                customers subscription based services and products.
-                <br/>
-                We handle all payments and subscription management so as to enable this with the click of a button
+                {description}
               </p>
             </div>
             <h1 className={'mt-2 mb-4'}> Continue as ...</h1>
@@ -50,6 +52,7 @@ class HomePage extends PureComponent {
         <FeatureSection/>
         <PricingSection/>
         <ContactSection/>
+        <TeamSection/>
       </>
     )
   }

@@ -16,8 +16,7 @@ export default props => {
               display: "flex",
               borderRadius: ".75rem",
             }}
-            className={"z-depth-1 pl-2 py-2"}
-    >
+            className={"z-depth-1 pl-2 py-2"}>
       <img alt={"google sign in icon"} src={'/googleIcon.svg'} className={"float-left"}
            style={{width: "70px", height: "70px"}}/>
       <span className={"float-right my-auto mx-2"}>Google {loader}</span>

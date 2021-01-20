@@ -6,12 +6,13 @@ import {WITHDRAW_TRANSACTION_QUERY} from "../WalletPage/queries";
 import Loader from "../Loader";
 import {withRouter} from "next/router";
 import {MDBContainer} from "mdbreact";
+import ErrorPage from "../ErrorPage";
 
 class ValidateWithdrawPage extends React.PureComponent {
   render() {
     const {data: {loading, error, withdrawTransaction}} = this.props;
     if (loading) return <Loader/>;
-    if (error) return <h1>{error.message}</h1>
+    if (error) return <ErrorPage message={error.message}/>
     return (
       <MDBContainer>
         <WithdrawOTPForm transaction={withdrawTransaction}/>

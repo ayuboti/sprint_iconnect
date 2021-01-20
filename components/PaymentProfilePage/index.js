@@ -2,10 +2,12 @@ import React from "react";
 import {MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBContainer, MDBRow} from "mdbreact";
 import {PAYMENT_PROFILE_QUERY} from "./queries";
 import {graphql} from "react-apollo"
-import Loader from "../Loader";
 import {NextSeo} from "next-seo";
-import PaymentPhoneForm from "./PaymentPhoneForm";
-import ChangePaymentPhoneModal from "./ChangePaymentPhoneModal";
+import PaymentPhoneForm from "./components/PaymentPhoneForm";
+import ChangePaymentPhoneModal from "./components/ChangePaymentPhoneModal";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
+
 import Link from "next/link";
 
 class PaymentProfilePage extends React.PureComponent {
@@ -25,8 +27,7 @@ class PaymentProfilePage extends React.PureComponent {
   render() {
     const {data: {loading, error, paymentProfile}} = this.props
     if (loading) return <Loader/>
-
-    if (error) return <h1>{error.message}</h1>
+    if (error) return <ErrorPage message={error.message} />
 
     if (!paymentProfile) {
       return (

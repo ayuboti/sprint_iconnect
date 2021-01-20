@@ -2,9 +2,11 @@ import React from 'react'
 import {MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
 import {USER_QUERY} from "./queries";
-import Loader from "../Loader";
+
 import Link from "next/link";
 import {NextSeo} from "next-seo";
+import ErrorPage from "../ErrorPage";
+import Loader from "../Loader";
 
 
 export function AccountCard(props) {
@@ -31,19 +33,12 @@ class AccountPage extends React.Component {
 
   render() {
     const {data: {loading, error, user, paymentProfile, memberProfile}} = this.props;
-
     if (loading) return <Loader/>;
-    // if error  return null
-    //TODO:create an error page
-    if (error) return <h1>{error.message}</h1>;
-
+    if (error) return <ErrorPage message={error.message}/>;
     const {email, firstName, lastName, plan} = user;
-
     const fullName = `${firstName} ${lastName}`;
+    const {phone} = paymentProfile;
 
-    const { phone} = paymentProfile;
-
-    const {name} = plan;
     return (
       <>
         <NextSeo title={"Account"}/>
@@ -74,7 +69,7 @@ class AccountPage extends React.Component {
               <AccountCard href={"/member/account/member-plan"}
                            title={"Membership Plan"}
                            className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2 text-capitalize"}>PLAN : <span className="text-bold text-uppercase">{name}</span>
+                <p className={"px-2 text-capitalize"}>PLAN : <span className="text-bold text-uppercase">{plan.name}</span>
                 </p>
               </AccountCard>
             </MDBCol>

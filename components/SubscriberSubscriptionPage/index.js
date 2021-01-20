@@ -1,5 +1,4 @@
 import React from "react";
-import Loader from "../Loader";
 import compose from "lodash.flowright"
 import {graphql} from "react-apollo";
 import {USER_SUBSCRIPTION_QUERY} from "./queries";
@@ -8,6 +7,9 @@ import {MDBBtn, MDBCard, MDBCardTitle, MDBCol, MDBContainer, MDBIcon, MDBRow} fr
 import NotSubscribedSection from "./NotSubscribedSection";
 import Countdown from 'react-countdown';
 import Link from "next/link";
+import Loader from "../Loader";
+import NotFoundPage from "../404Page";
+import ErrorPage from "../ErrorPage";
 
 const CountDownBox = ({value, label}) => {
   return (
@@ -52,22 +54,13 @@ class SubscriptionPage extends React.PureComponent {
 
   render() {
     const {data: {loading, error, subscription, userSubscription}} = this.props;
-    if (loading)
-      return <Loader/>
-    if (error)
-      return <h1>ERROR {error.message}</h1>
-    if (!subscription) {
-      // TODO: redirect to 404 page
-      return (
-        <MDBContainer>
-          <h1>No Subscription Found</h1>
-        </MDBContainer>
-      )
-    }
+    if (loading) return <Loader/>;
+    if (error) return <ErrorPage message={error.message} />
+    if (!subscription) return <NotFoundPage/>
 
-    if (!userSubscription) {
+    if (!userSubscription)
       return <NotSubscribedSection subscription={subscription}/>
-    }
+
     let {expiryDate} = userSubscription;
     const {id, name} = subscription;
     const paymentUrl = `/subscriber/subscriptions/${id}/pay`

@@ -1,10 +1,9 @@
-import React, {PureComponent} from 'react'
-
+import React from 'react'
 import {MDBBtn, MDBCardTitle, MDBCol, MDBIcon} from "mdbreact";
 import Link from "next/link";
 import Jumbotron from "../../Jumbotron";
 
-class HomeLanding extends PureComponent {
+class HomeLanding extends React.PureComponent {
 
   render() {
     return (
@@ -27,7 +26,7 @@ class HomeLanding extends PureComponent {
           </Link>
         </MDBCol>
       </Jumbotron>
-    )//content to be rendered after page load
+    )
   }
 }
 

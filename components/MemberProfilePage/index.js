@@ -4,10 +4,11 @@ import {MutationForm} from "../Form";
 import {Field} from "../FIeld";
 import {MEMBER_PROFILE_MUTATION, MEMBER_PROFILE_QUERY} from "./queries";
 import {graphql} from "react-apollo"
-import Loader from "../Loader";
 import {NextSeo} from "next-seo";
 import {redirect} from "../app/components";
 import {format_errors} from "../../_helpers";
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
 
 class MemberProfilePage extends React.PureComponent {
   state = {
@@ -44,26 +45,7 @@ class MemberProfilePage extends React.PureComponent {
   render() {
     const {data: {loading, error, memberProfile = {}}} = this.props
     if (loading) return <Loader/>
-    if (error) return <h1>{error.message}</h1>
-    // flag for whether the member Profile is new or not
-    const newProfile = !memberProfile;
-    // if new Profile show error alert on top
-    let createAlert = null;
-    if (newProfile)
-      createAlert = (
-        <>
-          <MDBCol size={"10"} md={"6"}>
-            <MDBAnimation type={"bounceIn"}>
-              <MDBAlert color={"danger"} className={"z-depth-1"}>
-                Fill in Membership Profile
-              </MDBAlert>
-            </MDBAnimation>
-          </MDBCol>
-          <MDBCol size={"12"}/>
-        </>
-      )
-
-    // get data from state
+    if (error) return <ErrorPage message={error.message}/>
     const {submitted, errors} = this.state
 
     return (
@@ -76,7 +58,18 @@ class MemberProfilePage extends React.PureComponent {
                         onCompleted={this.completeHandler}>
             <h1>Member Profile</h1>
             <MDBRow center>
-              {createAlert}
+              {!memberProfile ?
+                <>
+                  <MDBCol size={"10"} md={"6"}>
+                    <MDBAnimation type={"bounceIn"}>
+                      <MDBAlert color={"danger"} className={"z-depth-1"}>
+                        Fill in Membership Profile
+                      </MDBAlert>
+                    </MDBAnimation>
+                  </MDBCol>
+                  <MDBCol size={"12"}/>
+                </> : null
+              }
               <MDBCol size={"11"} md={"6"}>
                 <Field
                   submitted={submitted}

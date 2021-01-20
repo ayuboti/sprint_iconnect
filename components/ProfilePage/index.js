@@ -9,6 +9,7 @@ import {MutationForm} from "../Form";
 import {Field} from "../FIeld";
 import {NextSeo} from "next-seo";
 import {format_errors} from "../../_helpers";
+import ErrorPage from "../ErrorPage";
 
 class ProfilePage extends React.PureComponent {
   state = {
@@ -47,9 +48,7 @@ class ProfilePage extends React.PureComponent {
     const {data: {loading, error, user,}} = this.props;
 
     if (loading) return <Loader/>;
-
-    if (error) return null;
-
+    if (error) return <ErrorPage message={error.message}/>;
     const {submitted, errors} = this.state;
 
     return (
@@ -77,6 +76,7 @@ class ProfilePage extends React.PureComponent {
                     }
                   />
                 </MDBCol>
+                <MDBCol size={"12"} />
                 <MDBCol size={"12"} md={"6"}>
                   <Field
                     submitted={submitted}

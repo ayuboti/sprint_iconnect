@@ -59,6 +59,9 @@ class DefaultLayout extends PureComponent {
               <MDBNavItem active={"contact" === active} onClick={() => this.setState({active: 'contact'})}>
                 <NavLink href="/#contact-us">Contact Us</NavLink>
               </MDBNavItem>
+              <MDBNavItem active={"team" === active} onClick={() => this.setState({active: 'contact'})}>
+                <NavLink href="/#our-team">Our Team</NavLink>
+              </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {MDBContainer, MDBIcon, MDBNav, MDBNavItem, MDBTabContent, MDBTabPane} from "mdbreact";
-import NavLink from "../NavLink";
+import NavLink from "../../NavLink";
 import SubscribersTable from "./SubscribersTable";
 
 class SubscribersSection extends Component {

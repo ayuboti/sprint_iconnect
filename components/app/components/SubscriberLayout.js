@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {MDBAnimation, MDBCol, MDBRow} from "mdbreact";
-import {NextSeo} from "next-seo"
 import SubscriberSIdeNav from "./SubscriberSIdeNav";
 import {NavSmall} from "./MemberSideNav";
 import Loader from "../../Loader";
 import {graphql} from "react-apollo";
 import {APP_QUERY} from "../queries";
 import {redirect} from "./index";
+import ErrorPage from "../../ErrorPage";
+
 
 class SubscriberLayout extends React.Component {
   constructor(props) {
@@ -23,17 +24,12 @@ class SubscriberLayout extends React.Component {
   };
 
   render() {
-    const {title, secure=true, data: {user, loading, error}} = this.props;
-
+    const {secure=true, data: {user, loading, error}} = this.props;
     if (loading) return <Loader fullScreen={true}/>;
-
-    if (error) return <h1 className={"text-center"}>{error.message}</h1>;
-
+    if (error) return <ErrorPage message={error.message}/>;
     if (!user && secure) return redirect("/subscriber/login",true);
-
     return (
       <>
-        <NextSeo title={title}/>
         <MDBAnimation type={"fadeIn"}>
           <NavSmall toggleFunction={this.toggleFunction}/>
           <div className={"overflow-hidden"}>
@@ -55,7 +51,6 @@ class SubscriberLayout extends React.Component {
 
 SubscriberLayout.propTypes = {
   title: PropTypes.string,
-  user: PropTypes.object
 };
 
 export default graphql(

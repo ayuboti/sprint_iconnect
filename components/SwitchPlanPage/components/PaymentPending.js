@@ -1,18 +1,18 @@
 import React from 'react'
 import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
-import Loader from "../../Loader";
 import PropTypes from "prop-types";
 import {graphql} from 'react-apollo'
 import {PLAN_PAYMENT_STATUS_SUBSCRIPTION} from "../queries";
 import Link from "next/link";
+import Loader from "../../Loader";
+import ErrorPage from "../../ErrorPage";
 
 class PaymentPending extends React.PureComponent {
 
   render() {
-    const {data: {error, loading, memberPlanTransaction}} = this.props
-    if (error) {
-      return <h1>{error.message}</h1>
-    }
+    const {data: {error, loading, memberPlanTransaction}} = this.props;
+    if (error) return <ErrorPage message={error.message}/>;
+
     if (loading) {
       return (
         <MDBContainer>

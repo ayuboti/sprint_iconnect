@@ -1,29 +1,30 @@
 import React from "react";
 import {withRouter} from "next/router";
-import SwitchToFree from "./components/SwitchToFree";
 import compose from "lodash.flowright"
 import {graphql} from "react-apollo";
 import {MEMBER_PLAN_QUERY} from "../MemberPlanPage/queries";
-import Loader from "../Loader";
+
 import {redirect} from "../app/components";
 import PayForSubscription from "./components/PayForSubscription";
 import SwitchBetweenPlan from "./components/SwitchBetweenPlan";
+import SwitchToFree from "./components/SwitchToFree";
 
+import Loader from "../Loader";
+import ErrorPage from "../ErrorPage";
+import NotFoundPage from "../404Page";
 
 const plans = ["free", "basic", "premium"];
 
 
 const SwitchPlanPage = props => {
-  const {router: {query: {plan}}} = props;
-  const {data: {loading, error, user, pricing}} = props;
-
+  const {
+    router: {query: {plan}},
+    data: {loading, error, user, pricing}
+  } = props;
   if (loading) return <Loader/>;
+  if (error) return <ErrorPage message={error.message}/>;
+  if (!plans.includes(plan)) return <NotFoundPage/>;
 
-  if (error) return <h1>{error.measure}</h1>;
-
-  if (!plans.includes(plan)) {
-    return <h1>404 page</h1>;
-  }
   // if current user plan is the
   // same as the plan to pay for
   if (user.plan.name === plan) {

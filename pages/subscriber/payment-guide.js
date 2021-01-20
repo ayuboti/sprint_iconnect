@@ -1,8 +1,8 @@
 import React from 'react';
 import {withApollo} from "../../apollo";
-import CoursePaymentGuidePage from "../../components/SubscriptionPaymentGuide";
+import SubscriptionPaymentGuide from "../../components/SubscriptionPaymentGuide";
 import {withSubscriberLayout} from "../../components/app";
 
 export default withApollo({ssr: false})(
-  withSubscriberLayout(CoursePaymentGuidePage, {secure: false})
+  withSubscriberLayout(SubscriptionPaymentGuide, {secure: false})
 );
