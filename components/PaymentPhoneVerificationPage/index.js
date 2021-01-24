@@ -6,7 +6,7 @@ import {graphql} from "react-apollo";
 import VerifyPaymentPhoneForm from "./VerifyPaymentPhoneForm";
 import Link from "next/link";
 import {PAYMENT_PROFILE_QUERY} from "../PaymentProfilePage/queries";
-import ChangePaymentPhoneModal from "../PaymentProfilePage/ChangePaymentPhoneModal";
+import ChangePaymentPhoneModal from "../PaymentProfilePage/components/ChangePaymentPhoneModal";
 import compose from 'lodash.flowright';
 import {RESEND_VERIFICATION_CODE_MUTATION} from "./queries";
 import Loader from "../Loader";

@@ -4,7 +4,7 @@ import {graphql} from "react-apollo";
 import {USER_SUBSCRIPTION_QUERY} from "./queries";
 import {withRouter} from "next/router";
 import {MDBBtn, MDBCard, MDBCardTitle, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
-import NotSubscribedSection from "./NotSubscribedSection";
+import NotSubscribedSection from "./components/NotSubscribedSection";
 import Countdown from 'react-countdown';
 import Link from "next/link";
 import Loader from "../Loader";
