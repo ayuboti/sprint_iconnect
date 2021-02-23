@@ -26,11 +26,11 @@ export const SUBSCRIPTION_QUERY = gql`
 
 export const INITIATE_SUBSCRIPTION_TRANSACTION = gql`
   mutation InitiateSubscriptionTransaction(
-      $amount:Float!,$interval:String!,$frequency:Int!,$phone:String!,
+      $amount:Float!,$interval:String!,$phone:String!,
       $subscriptionId:String!,$callbackUrl:String!,$live:Boolean!
     ){
       initiateSubscriptionTransaction(
-        amount:$amount,phone:$phone,interval:$interval,frequency:$frequency,
+        amount:$amount,phone:$phone,interval:$interval,
         subscriptionId:$subscriptionId,callbackUrl:$callbackUrl,live:$live
       ){
         paymentPending

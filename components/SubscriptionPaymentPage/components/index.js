@@ -32,7 +32,7 @@ export class StepItem extends React.PureComponent {
         <div className="step-excerpt w-100">
           <p className={`pt-2 ${isSelected ? "d-none" : ""}`}>{name}</p>
           <MDBCollapse id={id} isOpen={currentID}>
-            <h2>{name}</h2>
+            <h4>{name}</h4>
             <MDBAnimation type={"fadeIn"} >
               {children}
             </MDBAnimation>

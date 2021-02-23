@@ -11,8 +11,7 @@ import {SUBSCRIPTION_QUERY} from "./queries";
 import {NextSeo} from "next-seo";
 import ErrorPage from "../ErrorPage"
 import NotFoundPage from "../404Page"
-import PaymentMethodSection from "./components/PaymentMethodSection";
-import PhoneNumberForm from "./components/PhoneNumberForm";
+import PayForSubscription from "./components/PayForSubscription";
 
 
 class SubscriptionPaymentPage extends React.PureComponent {
@@ -20,7 +19,6 @@ class SubscriptionPaymentPage extends React.PureComponent {
     collapseID: "login",
     finished: [],
     interval: "",
-    frequency: 1,
     amount: "",
     phone: "",
     success: false
@@ -39,14 +37,6 @@ class SubscriptionPaymentPage extends React.PureComponent {
     }
     if (collapseID === 'phone') {
       if (this.state.finished.includes('login') && this.state.finished.includes('amount'))
-        valid = true;
-    }
-    if (collapseID === 'finish') {
-      if (
-        this.state.finished.includes('login') &&
-        this.state.finished.includes('amount') &&
-        this.state.finished.includes('phone')
-      )
         valid = true;
     }
     if ((this.state.collapseID !== collapseID) && valid)
@@ -78,6 +68,7 @@ class SubscriptionPaymentPage extends React.PureComponent {
       isCreator = subscription.user.email === user.email
       //if (isCreator) return <CreatorLogin/>;
     }
+    const {collapseID, amount, interval} = this.state;
     return (
       <MDBContainer fluid>
         <NextSeo title={"Subscription Payment"}/>
@@ -90,7 +81,7 @@ class SubscriptionPaymentPage extends React.PureComponent {
                 id={"login"}
                 toggle={this.toggleCollapse}
                 name={"Login"}
-                currentID={this.state.collapseID}
+                currentID={collapseID}
                 icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
                 <PaymentLoginForm
                   subscription={subscription}
@@ -110,25 +101,13 @@ class SubscriptionPaymentPage extends React.PureComponent {
                         toggle={this.toggleCollapse}
                         name={"Enter your phone number"}
                         currentID={this.state.collapseID}
-                        icon={className => (<MDBIcon icon={"phone"} className={className}/>)}>
-                <PhoneNumberForm
-                  onChange={this.changeHandler}
-                  nextStep={this.nextStep('phone')}/>
-              </StepItem>
-              <StepItem id={"finish"}
-                        toggle={this.toggleCollapse}
-                        name={"Finish Payment"}
-                        currentID={this.state.collapseID}
-                        icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
-                <PaymentMethodSection
+                        icon={className => (<MDBIcon icon={"mobile"} className={className}/>)}>
+                <PayForSubscription
                   user={user}
-                  subscription={subscription}
-                  isCreator={isCreator}
-                  phone={this.state.phone}
-                  amount={this.state.amount}
-                  frequency={this.state.frequency}
-                  interval={this.state.interval}
-                />
+                  subscriptionId={subscription.id}
+                  amount={amount}
+                  interval={interval}
+                  isCreator={isCreator}/>
               </StepItem>
             </StepContainer>
           </MDBCol>

@@ -52,7 +52,7 @@ export default class PaymentLoginForm extends React.PureComponent {
             <h3>or</h3>
           </MDBCol>
           <MDBCol size={"12"} md={"5"}>
-            <h4>Sign in with another account ...</h4>
+            <h4>Sign in with ...</h4>
             <LoginForm buttonOnly scope={scope} redirectUrl={`/subscriber/subscriptions/${id}/pay`}/>
           </MDBCol>
         </MDBRow>

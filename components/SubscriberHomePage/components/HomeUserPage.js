@@ -1,6 +1,5 @@
 import React from 'react'
 import {MDBBtn, MDBCard, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact'
-import {graphql} from 'react-apollo';
 import Link from "next/link";
 import PropTypes from "prop-types";
 
@@ -28,7 +27,7 @@ class HomeUserPage extends React.Component {
                   <div className={`mask flex-center rgba-teal-light`}>
                     <Link href={'/subscriber/subscriptions'}>
                       <a>
-                        <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"} >
+                        <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"}>
                           <MDBIcon icon={"file-contract"} className={"mx-1"}/>
                           My Subscriptions
                         </MDBBtn>
@@ -53,7 +52,7 @@ class HomeUserPage extends React.Component {
                   <div className={`mask flex-center rgba-teal-light`}>
                     <Link href={'/subscriber/account'}>
                       <a>
-                        <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"} >
+                        <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"}>
                           <MDBIcon far icon={"user"} className={"mx-1"}/>
                           My Account
                         </MDBBtn>
@@ -70,8 +69,8 @@ class HomeUserPage extends React.Component {
   };
 }
 
-HomeUserPage.PropTypes ={
-  user:PropTypes.object.isRequired
+HomeUserPage.PropTypes = {
+  user: PropTypes.object.isRequired
 }
 
 export default HomeUserPage

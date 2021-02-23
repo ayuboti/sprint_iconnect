@@ -18,8 +18,8 @@ export default class AdminCard extends React.PureComponent {
               <MDBBtn className={"z-depth-none"} style={{borderRadius: "1rem"}}>
                 <MDBIcon icon={icon ? icon : "cog"} className={iconClass ? iconClass : ""}/>
               </MDBBtn>
-              <MDBCardText tag={"span"} className={"float-right"} style={{fontSize: "3rem"}}>
-                {this.props.value}
+              <MDBCardText tag={"span"} className={"float-right"} style={{fontSize: "2rem"}}>
+                {Math.round(this.props.value)}
               </MDBCardText>
             </MDBCol>
           </MDBRow>

@@ -21,11 +21,8 @@ class PayForSubscription extends React.PureComponent {
     return IPAY_LIVE
   }
 
-  getCallBack = (live = false) => {
-    let callback = `${location.origin}${IPAY_CALLBACK_ENDPOINT}`
-    if (!live)
-      return callback + "/test"
-    return callback
+  getCallBack = () => {
+    return `${location.origin}${IPAY_CALLBACK_ENDPOINT}`
   }
   submitHandler = e => {
     e.preventDefault()
