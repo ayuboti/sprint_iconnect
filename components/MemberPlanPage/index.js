@@ -32,7 +32,7 @@ class MemberPlanPage extends React.Component {
               <MDBCol size={"8"} md={"4"}>
                 <div className={"mt-3"}>
                   <h4> Ksh.{plan.monthlyPrice}/mo</h4>
-                  <p>{Math.round(plan.commission * 100)}% commission</p>
+                  <p>{(plan.commission * 100).toFixed(2)}% commission</p>
                 </div>
               </MDBCol>
               <MDBCol size={"12"} md={"8"} className={"text-center"}>
@@ -53,11 +53,6 @@ class MemberPlanPage extends React.Component {
         <h1 className="my-5 mx-2">Other Plans</h1>
         <MDBContainer>
           <MDBRow className="text-center">
-            {plan.name === "free" ? null :
-              <MDBCol lg={"6"} md={"12"} className="mb-4">
-                <MemberPlanPricing plan={"free"} price={"0"} commission={free.commission}/>
-              </MDBCol>
-            }
             {plan.name === "basic" ? null :
               <MDBCol lg={"6"} md={"12"} className="mb-4">
                 <MemberPlanPricing plan={"basic"} price={basic.monthlyPrice} commission={basic.commission}/>

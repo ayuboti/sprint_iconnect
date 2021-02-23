@@ -4,15 +4,15 @@ import {withRouter} from "next/router";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
 import Loader from "../Loader";
-import PaymentForm from "./components/PaymentForm";
 import {StepContainer, StepItem} from "./components";
 import ChooseAmountForm from "./components/ChooseAmountForm";
 import PaymentLoginForm from "./components/PaymentLoginForm";
 import {SUBSCRIPTION_QUERY} from "./queries";
-import CreatorLogin from "./components/CreatorLogin";
 import {NextSeo} from "next-seo";
 import ErrorPage from "../ErrorPage"
 import NotFoundPage from "../404Page"
+import PaymentMethodSection from "./components/PaymentMethodSection";
+import PhoneNumberForm from "./components/PhoneNumberForm";
 
 
 class SubscriptionPaymentPage extends React.PureComponent {
@@ -37,8 +37,16 @@ class SubscriptionPaymentPage extends React.PureComponent {
       if (this.state.finished.includes('login'))
         valid = true;
     }
-    if (collapseID === 'finish') {
+    if (collapseID === 'phone') {
       if (this.state.finished.includes('login') && this.state.finished.includes('amount'))
+        valid = true;
+    }
+    if (collapseID === 'finish') {
+      if (
+        this.state.finished.includes('login') &&
+        this.state.finished.includes('amount') &&
+        this.state.finished.includes('phone')
+      )
         valid = true;
     }
     if ((this.state.collapseID !== collapseID) && valid)
@@ -64,11 +72,11 @@ class SubscriptionPaymentPage extends React.PureComponent {
     if (loading) return <Loader/>;
     if (error) return <ErrorPage message={error.message}/>
     if (!subscription) return <NotFoundPage/>
-
-    if (user){
+    let isCreator;
+    if (user) {
       // ban creator from paying own subscription
-      const isCreator = subscription.user.email === user.email
-      if (isCreator) return <CreatorLogin/>;
+      isCreator = subscription.user.email === user.email
+      //if (isCreator) return <CreatorLogin/>;
     }
     return (
       <MDBContainer fluid>
@@ -78,12 +86,16 @@ class SubscriptionPaymentPage extends React.PureComponent {
         <MDBRow>
           <MDBCol size={"12"}>
             <StepContainer>
-              <StepItem id={"login"}
-                        toggle={this.toggleCollapse}
-                        name={"Login"}
-                        currentID={this.state.collapseID}
-                        icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
-                <PaymentLoginForm subscription={subscription} user={user} nextStep={this.nextStep('login')}/>
+              <StepItem
+                id={"login"}
+                toggle={this.toggleCollapse}
+                name={"Login"}
+                currentID={this.state.collapseID}
+                icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
+                <PaymentLoginForm
+                  subscription={subscription}
+                  user={user}
+                  nextStep={this.nextStep('login')}/>
               </StepItem>
               <StepItem id={"amount"}
                         toggle={this.toggleCollapse}
@@ -94,17 +106,29 @@ class SubscriptionPaymentPage extends React.PureComponent {
                                   onChange={this.changeHandler}
                                   nextStep={this.nextStep('amount')}/>
               </StepItem>
+              <StepItem id={"phone"}
+                        toggle={this.toggleCollapse}
+                        name={"Enter your phone number"}
+                        currentID={this.state.collapseID}
+                        icon={className => (<MDBIcon icon={"phone"} className={className}/>)}>
+                <PhoneNumberForm
+                  onChange={this.changeHandler}
+                  nextStep={this.nextStep('phone')}/>
+              </StepItem>
               <StepItem id={"finish"}
                         toggle={this.toggleCollapse}
                         name={"Finish Payment"}
                         currentID={this.state.collapseID}
                         icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
-                <PaymentForm subscription={subscription}
-                             amount={this.state.amount}
-                             frequency={this.state.frequency}
-                             interval={this.state.interval}
-                             onChange={this.changeHandler}
-                             nextStep={this.nextStep('finish')}/>
+                <PaymentMethodSection
+                  user={user}
+                  subscription={subscription}
+                  isCreator={isCreator}
+                  phone={this.state.phone}
+                  amount={this.state.amount}
+                  frequency={this.state.frequency}
+                  interval={this.state.interval}
+                />
               </StepItem>
             </StepContainer>
           </MDBCol>

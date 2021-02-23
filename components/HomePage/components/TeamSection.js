@@ -8,7 +8,7 @@ export default class TeamSection extends React.PureComponent {
         <div style={{height: "67px"}}/>
         <div className="container py-5 my-5">
           <section className="p-md-3 mx-md-5 text-center text-lg-left">
-            <h2 className="text-center mx-auto font-weight-bold mb-4 pb-2">Our Team</h2>
+            <h1 className="text-center mx-auto mb-4 pb-2">Our Team</h1>
             <MDBRow center>
               <div className="col-lg-4 mb-4">
                 <div className="p-4">

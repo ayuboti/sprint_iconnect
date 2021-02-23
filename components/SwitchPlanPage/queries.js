@@ -1,12 +1,19 @@
 import gql from "graphql-tag";
 
-export const PLAN_PAYMENT_MUTATION = gql`
-  mutation PayPlanSubscription($plan:String!,$monthsNo:Int!,$phone:String!){
-    payMemberPlan(plan:$plan,phone:$phone,monthsNo:$monthsNo){
+export const INITIATE_PLAN_PAYMENT = gql`
+  mutation InitiateMemberPlanTransaction(
+      $plan:String!,$monthsNo:Int!,$phone:String!,
+      $callbackUrl:String!
+    ){
+    initiateMemberPlanTransaction(
+        plan:$plan,phone:$phone,monthsNo:$monthsNo,
+        callbackUrl:$callbackUrl
+      ){
       paymentPending
       transaction{
         id
       }
+      hash
       errors{
         field
         errors

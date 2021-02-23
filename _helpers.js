@@ -7,3 +7,11 @@ export const format_errors = (errors) => {
   )
   return error_object
 }
+
+export const login = ({accessToken}, redirectUrl) => {
+  window.localStorage.setItem("access_token", accessToken);
+  if (!redirectUrl)
+    window.location = "/"
+  else
+    window.location = redirectUrl
+};

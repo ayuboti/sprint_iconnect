@@ -8,7 +8,7 @@ export const loginWithGoogle = gql`
           field
           errors
         }
-        token
+        accessToken
       }
     }
   `

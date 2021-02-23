@@ -7,15 +7,12 @@ import PropTypes from "prop-types";
 class HomeUserPage extends React.Component {
 
   render() {
-    const {user} = this.props;
-    const {email, firstName, lastName} = user;
-    const fullName = `${firstName} ${lastName}`;
     return (
       <>
         <MDBContainer className={"py-3 px-3"}>
           <MDBContainer>
             <MDBRow className={"mt-5"}>
-              <MDBCol size={"12"} md={"4"}>
+              <MDBCol size={"12"} md={"4"} className={"py-2"}>
                 <div className={"view"} style={{borderRadius: "1rem"}}>
                   <MDBCard style={{borderRadius: "1rem"}}>
                     <MDBCardImage zoom src={'/subscriptions.jpg'}
@@ -40,7 +37,7 @@ class HomeUserPage extends React.Component {
                   </div>
                 </div>
               </MDBCol>
-              <MDBCol size={"12"} md={"4"}>
+              <MDBCol size={"12"} md={"4"} className={"py-2"}>
                 <div className={"view"} style={{borderRadius: "1rem"}}>
                   <MDBCard style={{borderRadius: "1rem"}}>
                     <MDBCardImage zoom src={'/my-account.jpg'}

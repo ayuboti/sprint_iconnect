@@ -60,6 +60,7 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
         </MDBContainer>
       )
     }
+    const {changePhone} = this.state;
 
     return (
       <>
@@ -74,7 +75,6 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
                 <MDBAlert color={"info"} className={"z-depth-1"}>
                   Check your phone ({paymentProfile.phone}) for message from AFRIKAS TALKING
                   and enter the code below
-                  const {changePhone} = this.state;
                 </MDBAlert>
               </MDBAnimation>
               {this.state.alerts.map(

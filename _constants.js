@@ -9,13 +9,10 @@ export const make_url = (domain, protocol = 'http', secure = false) => {
 
 const API_DOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN
 
-export const API_URL =  make_url(API_DOMAIN, 'http', !dev);
+export const API_URL = make_url(API_DOMAIN, 'http', !dev);
 
 export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
 
-export const API_WS_URL = make_url(API_DOMAIN, 'ws', !dev);
-
-export const GRAPHQL_WS_ENDPOINT = `${API_WS_URL}/ws/graph_ql`
 
 /******************************
  * SOCIAL LOGIN CLIENT IDS
@@ -27,3 +24,8 @@ export const GOOGLE_CONFIG = {
     'https://www.googleapis.com/auth/userinfo.profile ' +
     'https://www.googleapis.com/auth/userinfo.email '
 };
+
+
+export const IPAY_VENDOR_ID = process.env.NEXT_PUBLIC_IPAY_VENDOR_ID
+
+export const IPAY_LIVE = process.env.NEXT_PUBLIC_IPAY_LIVE

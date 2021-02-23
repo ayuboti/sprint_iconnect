@@ -23,7 +23,7 @@ export default class PricingSection extends React.PureComponent {
                       </MDBCol>
                       <MDBCol md={"4"} className="text-center pt-4">
                         <p className="h1 font-weight-normal">Ksh.0<small>/month</small></p>
-                        <p className="h5 font-weight-light text-muted mb-4">@0.07 commission </p>
+                        <p className="h5 font-weight-light text-muted mb-4">@7% commission </p>
                       </MDBCol>
                     </MDBRow>
                   </MDBCardBody>
@@ -42,7 +42,7 @@ export default class PricingSection extends React.PureComponent {
                       </MDBCol>
                       <MDBCol md={"4"} className="text-center pt-4">
                         <p className="h1 font-weight-normal">Ksh.500<small>/month</small></p>
-                        <p className="h5 font-weight-light text-muted mb-4">@0.05 commission</p>
+                        <p className="h5 font-weight-light text-muted mb-4">@ 5% commission</p>
                       </MDBCol>
                     </MDBRow>
                   </MDBCardBody>
@@ -61,7 +61,7 @@ export default class PricingSection extends React.PureComponent {
                       </MDBCol>
                       <MDBCol md={"4"} className="text-center pt-4">
                         <p className="h1 font-weight-normal">Ksh.750<small>/month</small></p>
-                        <p className="h5 font-weight-light text-muted mb-4">@0.03 commission </p>
+                        <p className="h5 font-weight-light text-muted mb-4">@ 3% commission </p>
                       </MDBCol>
                     </MDBRow>
                   </MDBCardBody>

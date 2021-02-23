@@ -11,7 +11,6 @@ export const USER_SUBSCRIPTION_QUERY = gql`
     }
     userSubscription(subscriptionId:$subscriptionId){
       id
-      balance
       expiryDate
     }
   }`;

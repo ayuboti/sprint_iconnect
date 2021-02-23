@@ -41,7 +41,7 @@ class SwitchBetweenPlan extends React.PureComponent {
                     Ksh.{currentPlan.monthlyPrice}<small className="text-muted">/ mo</small>
                   </h3>
                   <h5 className="card-title pricing-card-title mb-4">
-                    {currentPlan.commission}% commission
+                    {Math.round(plan.commission * 100)}% commission
                   </h5>
                 </MDBCardBody>
               </MDBCard>
@@ -60,7 +60,7 @@ class SwitchBetweenPlan extends React.PureComponent {
                     Ksh.{nextPlan.monthlyPrice}<small className="text-muted">/ mo</small>
                   </h3>
                   <h5 className="card-title pricing-card-title mb-4">
-                    {nextPlan.commission}% commission
+                    {Math.round(nextPlan.commission * 100)}% commission
                   </h5>
                 </MDBCardBody>
               </MDBCard>

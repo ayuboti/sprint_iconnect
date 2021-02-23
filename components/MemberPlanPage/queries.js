@@ -4,6 +4,7 @@ export const MEMBER_PLAN_QUERY = gql`
 query MemberPlanQuery{
   user{
     id
+    email
     plan {
       name
       monthlyPrice

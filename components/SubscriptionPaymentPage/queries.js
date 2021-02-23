@@ -20,39 +20,28 @@ export const SUBSCRIPTION_QUERY = gql`
       firstName
       lastName
       email
+      imageUrl
     }  
   }`;
 
-export const SUBSCRIPTION_PAYMENT_MUTATION = gql`
-  mutation PaySubscription($amount:Float!,$interval:String!,$frequency:Int!,$phone:String!,$subscriptionId:String!){
-    paySubscription(amount:$amount,phone:$phone,interval:$interval,frequency:$frequency,subscriptionId:$subscriptionId){
-      paymentPending
-      transaction{
-        id
-      }
-      errors{
-        field
-        errors
-      }
-    }
-  }
-`
-
-export const PAYMENT_STATUS_SUBSCRIPTION = gql`
-  subscription PaymentSubscription($transactionId:ID!){
-    subscriptionTransaction(transactionId:$transactionId){
-      id
-      successStatus
-      reasonFailed
-      amount
-      userSubscription{
-        id
-        expiryDate
-        subscription{
+export const INITIATE_SUBSCRIPTION_TRANSACTION = gql`
+  mutation InitiateSubscriptionTransaction(
+      $amount:Float!,$interval:String!,$frequency:Int!,$phone:String!,
+      $subscriptionId:String!,$callbackUrl:String!,$live:Boolean!
+    ){
+      initiateSubscriptionTransaction(
+        amount:$amount,phone:$phone,interval:$interval,frequency:$frequency,
+        subscriptionId:$subscriptionId,callbackUrl:$callbackUrl,live:$live
+      ){
+        paymentPending
+        transaction{
           id
-          name
+        }
+        hash
+        errors{
+          field
+          errors
         }
       }
-    }
   }
 `

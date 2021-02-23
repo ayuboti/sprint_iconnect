@@ -32,12 +32,12 @@ const SwitchPlanPage = props => {
     // to look for a subscription
     if (plan === "free") return redirect('/member/account/member-plan');
     // pay for the plan
-    return <PayForSubscription plan={plan} price={pricing[plan].monthlyPrice}/>;
+    return <PayForSubscription user={user} plan={plan} price={pricing[plan].monthlyPrice}/>;
   }
   // switch from one of the paid plans to free
   if (plan === "free") return <SwitchToFree plan={user.plan}/>;
 
-  if (user.plan.name === "free") return <PayForSubscription plan={plan} price={pricing[plan].monthlyPrice}/>;
+  if (user.plan.name === "free") return <PayForSubscription user={user} plan={plan} price={pricing[plan].monthlyPrice}/>;
 
   // if the plan is being switched between the basic and premium package
   return <SwitchBetweenPlan plan={plan} user={user} pricing={pricing}/>;

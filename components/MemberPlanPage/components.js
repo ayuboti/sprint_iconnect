@@ -22,7 +22,8 @@ export const MemberPlanPricing = ({plan, price, commission, children}) => {
         </h3>
         <ol className="list-unstyled mb-4">
           <MemberPlanPricingItem>
-            <h6>{Math.round(commission * 100)}% commission
+
+            <h6>{(commission * 100).toFixed(2)}% commission
               <MDBIcon icon={"check"} className="green-text ml-1"/>
             </h6>
           </MemberPlanPricingItem>

@@ -58,7 +58,7 @@ class ChooseAmountForm extends React.PureComponent {
         interval,
         frequency: this.state[interval]
       })
-      this.props.nextStep('finish')
+      this.props.nextStep('phone')
     }
   }
 
