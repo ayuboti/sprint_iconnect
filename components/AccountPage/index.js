@@ -32,13 +32,11 @@ export function AccountCard(props) {
 class AccountPage extends React.Component {
 
   render() {
-    const {data: {loading, error, user, paymentProfile, memberProfile}} = this.props;
+    const {data: {loading, error, user, memberProfile}} = this.props;
     if (loading) return <Loader/>;
     if (error) return <ErrorPage message={error.message}/>;
     const {email, firstName, lastName, plan} = user;
     const fullName = `${firstName} ${lastName}`;
-    const {phone} = paymentProfile;
-
     return (
       <>
         <NextSeo title={"Account"}/>
@@ -52,13 +50,6 @@ class AccountPage extends React.Component {
               </AccountCard>
             </MDBCol>
             <MDBCol size={"12"} md={"6"} className={"my-3"}>
-              <AccountCard href={"/member/account/payment"}
-                           title={"Payment Profile"}
-                           className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2"}>PAYMENT PHONE. : {phone}</p>
-              </AccountCard>
-            </MDBCol>
-            <MDBCol size={"12"} md={"6"} className={"my-3"}>
               <AccountCard href={"/member/account/member-profile"}
                            title={"Member Profile"}
                            className={"z-depth-half m-2 h-100"}>
@@ -69,7 +60,8 @@ class AccountPage extends React.Component {
               <AccountCard href={"/member/account/member-plan"}
                            title={"Membership Plan"}
                            className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2 text-capitalize"}>PLAN : <span className="text-bold text-uppercase">{plan.name}</span>
+                <p className={"px-2 text-capitalize"}>PLAN : <span
+                  className="text-bold text-uppercase">{plan.name}</span>
                 </p>
               </AccountCard>
             </MDBCol>
