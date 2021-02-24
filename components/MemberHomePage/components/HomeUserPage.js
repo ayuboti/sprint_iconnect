@@ -39,7 +39,7 @@ class HomeUserPage extends React.Component {
                   <AdminCard
                     title={"Total Earnings (Ksh)"}
                     iconClass={"fa-money-bill"}
-                    value={totalEarnings.toString()}/>
+                    value={totalEarnings}/>
                 </MDBAnimation>
               </MDBCol>
               <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
@@ -47,7 +47,7 @@ class HomeUserPage extends React.Component {
                   <AdminCard
                     title={"Wallet Balance (Ksh)"}
                     icon={"wallet"}
-                    value={wallet.balance.toString()}/>
+                    value={wallet.balance}/>
                 </MDBAnimation>
               </MDBCol>
               <MDBCol size={"12"}>

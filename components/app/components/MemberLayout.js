@@ -26,7 +26,7 @@ class MemberLayout extends React.Component {
   render() {
     const {
       secure,
-      data: {user, memberProfile, paymentProfile, loading, error},
+      data: {user, memberProfile, loading, error},
       router: {pathname}
     } = this.props;
     if (loading) return <Loader fullScreen={true}/>;
@@ -36,16 +36,7 @@ class MemberLayout extends React.Component {
     // redirect the user to set it
     if (!memberProfile && (pathname !== '/member/account/member-profile') && user)
       return redirect('/member/account/member-profile')
-    // check if payment profile and member profile is set if not
-    // redirect to page where the account payment will be set
-    if (!paymentProfile && (pathname !== '/member/account/payment') && user && memberProfile)
-      return redirect('/member/account/payment')
 
-    // make sure payment phone is verified
-    if (paymentProfile && (pathname !== '/member/account/payment/verify-phone') && user && memberProfile) {
-      if (!paymentProfile.phoneVerified)
-        return redirect('/member/account/payment/verify-phone')
-    }
     return (
       <>
         <MDBAnimation type={"fadeIn"}>

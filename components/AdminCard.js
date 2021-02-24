@@ -5,6 +5,11 @@ import {MDBBtn, MDBCard, MDBCardBody, MDBCardText, MDBCardTitle, MDBCol, MDBIcon
 export default class AdminCard extends React.PureComponent {
   render() {
     const {icon, iconClass} = this.props;
+
+    let value = Math.round(this.props.value)
+    if (!value)
+      value = this.props.value
+
     return (
       <MDBCard className={"my-3 h-100"} role={"button"} style={{borderRadius: "1rem"}}>
         <MDBCardBody>
@@ -19,7 +24,7 @@ export default class AdminCard extends React.PureComponent {
                 <MDBIcon icon={icon ? icon : "cog"} className={iconClass ? iconClass : ""}/>
               </MDBBtn>
               <MDBCardText tag={"span"} className={"float-right"} style={{fontSize: "2rem"}}>
-                {Math.round(this.props.value)}
+                {value}
               </MDBCardText>
             </MDBCol>
           </MDBRow>

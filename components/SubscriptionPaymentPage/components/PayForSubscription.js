@@ -5,7 +5,7 @@ import {graphql} from "react-apollo";
 import Loader from "../../Loader";
 import {INITIATE_SUBSCRIPTION_TRANSACTION} from "../queries";
 import IPAYButton from "@bit/makinika.ipay.ipay-button";
-import {IPAY_VENDOR_ID} from "../../../_constants";
+import {IPAY_LIVE, IPAY_VENDOR_ID} from "../../../_constants";
 import PropTypes from "prop-types";
 
 const IPAY_CALLBACK_ENDPOINT = `/subscriber/transactions/callback`;
@@ -18,15 +18,16 @@ class PayForSubscription extends React.PureComponent {
 
   }
 
-  getCallBack = (live = false) => {
+  getCallBack = () => {
+    const {isCreator} = this.props;
     let callback = `${location.origin}${IPAY_CALLBACK_ENDPOINT}`
-    if (!live)
+    if (isCreator)
       return callback + "/test"
     return callback
   }
   getIsLive = () => {
     const {isCreator} = this.props;
-    return !isCreator
+    return !isCreator && IPAY_LIVE
   }
   initializeFunction = async () => {
     // get the hash and the transaction id of the ipay transaction
@@ -47,7 +48,7 @@ class PayForSubscription extends React.PureComponent {
           amount,
           interval,
           subscriptionId,
-          callbackUrl: this.getCallBack(isLive),
+          callbackUrl: this.getCallBack(),
           live: isLive
         }
       }
@@ -84,6 +85,8 @@ class PayForSubscription extends React.PureComponent {
   }
 
   render() {
+    const {amount, user} = this.props;
+    if (!user) return null;
     const {phone, loading} = this.state;
     let errors = this.state.errors;
     if (!errors.length && !this.isValidPhone(phone))
@@ -99,7 +102,6 @@ class PayForSubscription extends React.PureComponent {
     const invalidClass = errors.length && phone ? "is-invalid" : "";
     const validClass = !errors.length && phone ? "is-valid" : "";
 
-    const {amount, user} = this.props;
 
     return (
       <MDBContainer>
@@ -142,7 +144,7 @@ class PayForSubscription extends React.PureComponent {
                 amount={amount}
                 email={user.email}
                 phoneNumber={phone.substring(1)}
-                callbackUrl={this.getCallBack(this.getIsLive())}
+                callbackUrl={this.getCallBack()}
                 initializeFunc={this.initializeFunction}
                 customComponent={
                   (props) => (

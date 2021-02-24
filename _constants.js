@@ -28,4 +28,4 @@ export const GOOGLE_CONFIG = {
 
 export const IPAY_VENDOR_ID = process.env.NEXT_PUBLIC_IPAY_VENDOR_ID
 
-export const IPAY_LIVE = process.env.NEXT_PUBLIC_IPAY_LIVE
+export const IPAY_LIVE = process.env.NEXT_PUBLIC_IPAY_LIVE === "true"

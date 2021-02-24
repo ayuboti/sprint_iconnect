@@ -89,7 +89,7 @@ class WalletPage extends React.PureComponent {
         <MDBContainer className={"px-4"}>
           <MDBRow>
             <MDBCol size={"12"} md={"6"} className={"my-2"}>
-              <AdminCard value={`Ksh.${wallet.balance}`} title={"Wallet Balance"} iconClass={"fa-money-bill"}/>
+              <AdminCard value={`Ksh ${wallet.balance}`} title={"Wallet Balance (KES)"} iconClass={"fa-money-bill"}/>
             </MDBCol>
             <MDBCol size={"12"} md={"6"} className={"my-2"}>
               <MDBCard className={"my-3 h-100"} style={{borderRadius: "1rem"}}>

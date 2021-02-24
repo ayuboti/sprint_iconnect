@@ -19,12 +19,7 @@ export default class PaymentLoginForm extends React.PureComponent {
     if (!user) {
       return (
         <MDBContainer>
-          <h5 className="text-muted">Please login to your google account to continue</h5>
-          <MDBRow center>
-            <MDBCol size={"12"} md={"6"}>
-              <LoginForm scope={scope} redirectUrl={`/subscriber/subscriptions/${id}/pay`}/>
-            </MDBCol>
-          </MDBRow>
+          <LoginForm scope={scope} redirectUrl={`/subscriber/subscriptions/${id}/pay`}/>
         </MDBContainer>
       )
     }
