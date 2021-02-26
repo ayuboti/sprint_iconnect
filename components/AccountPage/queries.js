@@ -7,28 +7,18 @@ export const USER_QUERY = gql`
       email
       firstName
       lastName
-      plan {
-        name
-        monthlyPrice
-        commission
-        expiryDate
-        isActive
-      }
-    }
-    paymentProfile{
-      id
-      phone
-      paybillNumber
-      paybillAccount
     }
     memberProfile{
       id
       organisationName
+      phone
     }
-    plan{
+    plan {
       name
       monthlyPrice
       commission
+      expiryDate
+      isActive
     }
   }
 `;

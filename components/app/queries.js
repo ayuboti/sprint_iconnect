@@ -10,10 +10,6 @@ export const APP_QUERY = gql`
       email
       imageUrl
     }
-    paymentProfile{
-      id
-      phoneVerified
-    }
     memberProfile{
       id
     }

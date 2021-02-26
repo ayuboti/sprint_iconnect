@@ -5,13 +5,13 @@ query MemberPlanQuery{
   user{
     id
     email
-    plan {
-      name
-      monthlyPrice
-      commission
-      expiryDate
-      isActive
-    }
+  }
+  plan {
+    name
+    monthlyPrice
+    commission
+    expiryDate
+    isActive
   }
   pricing{
     free{

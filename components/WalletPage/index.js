@@ -14,7 +14,6 @@ import {
   MDBTableHead
 } from "mdbreact";
 import AdminCard from "../AdminCard";
-import WithdrawModal from "./components/WithdrawModal";
 import {WALLET_QUERY} from "./queries";
 import Link from "next/link";
 import {NextSeo} from "next-seo";
@@ -22,67 +21,11 @@ import Loader from "../Loader";
 import ErrorPage from "../ErrorPage";
 
 class WalletPage extends React.PureComponent {
-  state = {
-    isOpen: false,
-  }
-  toggle = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
 
   render() {
-    const {data: {loading, error, wallet, paymentProfile}} = this.props;
+    const {data: {loading, error, wallet}} = this.props;
     if (loading) return <Loader/>;
     if (error) return <ErrorPage message={error.message}/>;
-
-    const transactionList = wallet.transactions.map(
-      ({id, amount, transactionDate, transactionCost, state}, key) => {
-        let stateButton;
-        let transactionDateStr;
-        transactionDateStr = new Intl.DateTimeFormat("en-US", {
-          weekday: "short",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour12: true,
-          hour: "numeric",
-          minute: "numeric"
-        }).format(new Date(transactionDate));
-
-        if (state === "REQUESTED")
-          stateButton = <MDBBtn size={"sm"} color={"white darken-4"}>Requested</MDBBtn>
-        if (state === "VALIDATED")
-          stateButton = <MDBBtn size={"sm"} color={"primary"}>Validated</MDBBtn>
-        if (state === "QUEUED")
-          stateButton = <MDBBtn size={"sm"} color={"warning"}>Queued</MDBBtn>
-        if (state === "SUCCESS")
-          stateButton = <MDBBtn size={"sm"} color={"success"}>Success</MDBBtn>
-        if (state === "FAILED")
-          stateButton = <MDBBtn size={"sm"} color={"danger"}>Failed</MDBBtn>
-        return (
-          <tr key={key}>
-            <td>{amount}</td>
-            <td>{stateButton}</td>
-            <td>{transactionDateStr}</td>
-            <td>{transactionCost ? `Ksh.${transactionCost}` : "N/A"}</td>
-            {state === "REQUESTED" ?
-              <td>
-                <Link href={"/member/wallet/validate-withdraw/[transactionId]"}
-                      as={`/member/wallet/validate-withdraw/${id}`}>
-                  <a>
-                    <MDBBtn className={"rounded-pill"}>
-                      VALIDATE WITHDRAW
-                    </MDBBtn>
-                  </a>
-                </Link>
-              </td>
-              : <td/>
-            }
-          </tr>
-        )
-      }
-    )
     return (
       <>
         <NextSeo title={"Wallet"}/>
@@ -101,12 +44,14 @@ class WalletPage extends React.PureComponent {
                       </MDBCardTitle>
                     </MDBCol>
                     <MDBCol size={"12"} className={"text-center"}>
-                      <MDBBtn size={"lg"} className={"rounded-pill my-3 mx-5 w-auto"} onClick={this.toggle}>
-                        <MDBIcon icon={"cash-register"} className={"mx-4"} size={"1x"}/>
-                        WITHDRAW
-                      </MDBBtn>
-                      <WithdrawModal paymentProfile={paymentProfile}
-                                     balance={wallet.balance} toggle={this.toggle} isOpen={this.state.isOpen}/>
+                      <Link href={"/member/wallet/withdraw"}>
+                        <a>
+                          <MDBBtn size={"lg"} className={"rounded-pill my-3 w-auto"} onClick={this.toggle}>
+                            <MDBIcon icon={"cash-register"} className={"mx-4"} size={"1x"}/>
+                            WITHDRAW
+                          </MDBBtn>
+                        </a>
+                      </Link>
                     </MDBCol>
                   </MDBRow>
                 </MDBCardBody>
@@ -117,13 +62,61 @@ class WalletPage extends React.PureComponent {
                 <h1>Withdraw Transactions</h1>
                 <MDBTable responsive>
                   <MDBTableHead>
-                      <th>Amount</th>
-                      <th>State</th>
-                      <th>Transaction Date</th>
-                      <th>Transaction Cost</th>
+                    <th>Amount</th>
+                    <th>State</th>
+                    <th>Transaction Date</th>
+                    <th>Transaction Cost</th>
                   </MDBTableHead>
                   <MDBTableBody>
-                    {transactionList}
+                    {
+                      wallet.transactions.map(
+                        ({id, amount, transactionDate, transactionCost, state}, key) => {
+                          let stateButton;
+                          let transactionDateStr;
+                          transactionDateStr = new Intl.DateTimeFormat("en-US", {
+                            weekday: "short",
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour12: true,
+                            hour: "numeric",
+                            minute: "numeric"
+                          }).format(new Date(transactionDate));
+
+                          if (state === "REQUESTED")
+                            stateButton = <MDBBtn size={"sm"} color={"white darken-4"}>Requested</MDBBtn>
+                          if (state === "VALIDATED")
+                            stateButton = <MDBBtn size={"sm"} color={"primary"}>Validated</MDBBtn>
+                          if (state === "QUEUED")
+                            stateButton = <MDBBtn size={"sm"} color={"warning"}>Queued</MDBBtn>
+                          if (state === "SUCCESS")
+                            stateButton = <MDBBtn size={"sm"} color={"success"}>Success</MDBBtn>
+                          if (state === "FAILED")
+                            stateButton = <MDBBtn size={"sm"} color={"danger"}>Failed</MDBBtn>
+                          return (
+                            <tr key={key}>
+                              <td>{amount}</td>
+                              <td>{stateButton}</td>
+                              <td>{transactionDateStr}</td>
+                              <td>{transactionCost ? `Ksh.${transactionCost}` : "N/A"}</td>
+                              {state === "REQUESTED" ?
+                                <td>
+                                  <Link href={"/member/wallet/validate-withdraw/[transactionId]"}
+                                        as={`/member/wallet/validate-withdraw/${id}`}>
+                                    <a>
+                                      <MDBBtn className={"rounded-pill"}>
+                                        VALIDATE WITHDRAW
+                                      </MDBBtn>
+                                    </a>
+                                  </Link>
+                                </td>
+                                : <td/>
+                              }
+                            </tr>
+                          )
+                        }
+                      )
+                    }
                   </MDBTableBody>
                 </MDBTable>
               </MDBCard>

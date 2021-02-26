@@ -89,10 +89,7 @@ class PayForSubscription extends React.PureComponent {
         errors = errors.concat(['Invalid Phone Number'])
     }
     const {price, user} = this.props;
-    if (!errors.length && !this.isValidPhone(phone)) {
-      errors = errors.append(['Invalid Phone Number'])
-      alert(errors)
-    }
+
     const inputErrors = errors.map(
       (error, key) => (
         <div key={key} className="invalid-feedback">

@@ -19,7 +19,7 @@ const plans = ["free", "basic", "premium"];
 const SwitchPlanPage = props => {
   const {
     router: {query: {plan}},
-    data: {loading, error, user, pricing}
+    data: {loading, error, user,plan:userPlan, pricing}
   } = props;
   if (loading) return <Loader/>;
   if (error) return <ErrorPage message={error.message}/>;
@@ -27,7 +27,7 @@ const SwitchPlanPage = props => {
 
   // if current user plan is the
   // same as the plan to pay for
-  if (user.plan.name === plan) {
+  if (userPlan.name === plan) {
     // if free is to free redirect to member plan
     // to look for a subscription
     if (plan === "free") return redirect('/member/account/member-plan');
@@ -35,12 +35,12 @@ const SwitchPlanPage = props => {
     return <PayForSubscription user={user} plan={plan} price={pricing[plan].monthlyPrice}/>;
   }
   // switch from one of the paid plans to free
-  if (plan === "free") return <SwitchToFree plan={user.plan}/>;
+  if (plan === "free") return <SwitchToFree plan={userPlan}/>;
 
-  if (user.plan.name === "free") return <PayForSubscription user={user} plan={plan} price={pricing[plan].monthlyPrice}/>;
+  if (userPlan.name === "free") return <PayForSubscription user={user} plan={plan} price={pricing[plan].monthlyPrice}/>;
 
   // if the plan is being switched between the basic and premium package
-  return <SwitchBetweenPlan plan={plan} user={user} pricing={pricing}/>;
+  return <SwitchBetweenPlan plan={plan}  userPlan={userPlan} pricing={pricing}/>;
 }
 export default withRouter(
   compose(

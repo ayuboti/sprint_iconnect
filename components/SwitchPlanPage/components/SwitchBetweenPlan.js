@@ -3,10 +3,15 @@ import {MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCol, MDBContainer, MDBRo
 import {graphql} from "react-apollo";
 import {SWITCH_PLAN_MUTATION} from "../queries";
 import {redirect} from "../../app/components";
+import {MEMBER_PLAN_QUERY} from "../../MemberPlanPage/queries";
 
 class SwitchBetweenPlan extends React.PureComponent {
   clickHandler = () => {
-    this.props.switchPlan().then(
+    this.props.switchPlan({
+      refetchQueries:[
+        {query:MEMBER_PLAN_QUERY}
+      ]}
+      ).then(
       ({data: {switchPlan: {successStatus}}}) => {
         if (successStatus)
           redirect('/member/account/member-plan')
@@ -15,7 +20,7 @@ class SwitchBetweenPlan extends React.PureComponent {
   }
 
   render() {
-    const {plan, user: {plan: {name}}, pricing} = this.props;
+    const {plan, userPlan:{name}, pricing} = this.props;
     const currentPlan = pricing[name];
     const nextPlan = pricing[plan];
     return (
@@ -41,7 +46,7 @@ class SwitchBetweenPlan extends React.PureComponent {
                     Ksh.{currentPlan.monthlyPrice}<small className="text-muted">/ mo</small>
                   </h3>
                   <h5 className="card-title pricing-card-title mb-4">
-                    {Math.round(plan.commission * 100)}% commission
+                    {(currentPlan.commission * 100).toFixed(2)}% commission
                   </h5>
                 </MDBCardBody>
               </MDBCard>
@@ -60,7 +65,7 @@ class SwitchBetweenPlan extends React.PureComponent {
                     Ksh.{nextPlan.monthlyPrice}<small className="text-muted">/ mo</small>
                   </h3>
                   <h5 className="card-title pricing-card-title mb-4">
-                    {Math.round(nextPlan.commission * 100)}% commission
+                    {(nextPlan.commission * 100).toFixed(2)}% commission
                   </h5>
                 </MDBCardBody>
               </MDBCard>

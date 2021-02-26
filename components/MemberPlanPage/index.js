@@ -10,12 +10,11 @@ import ErrorPage from "../ErrorPage";
 
 class MemberPlanPage extends React.Component {
   render() {
-    const {data: {loading, error, pricing, user}} = this.props;
+    const {data: {loading, error, pricing, user, plan}} = this.props;
     if (loading) return <Loader/>;
-    if (error) return <ErrorPage message={error.message} />;
+    if (error) return <ErrorPage message={error.message}/>;
+    const {basic, premium} = pricing;
 
-    const {free, basic, premium} = pricing;
-    const {plan} = user;
     return (
       <MDBContainer>
         <h1 className={"my-5 mx-2"}>Active Plan</h1>
@@ -23,9 +22,18 @@ class MemberPlanPage extends React.Component {
           <MDBCard className={"p-3"} style={{borderRadius: "1rem"}}>
             <MDBCardHeader color={"white"} className={"text-dark"} tag={"div"}><h1>{plan.name}</h1></MDBCardHeader>
             <div className={"py-3 text-center"}>
-              <h2>Valid For</h2>
               <MDBContainer>
-                <ExpiryCountDown date={plan.expiryDate}/>
+                {plan.name === "free" ?
+                  <>
+                    <h3 className={"text-muted"}>Free forever</h3>
+                    <img height={"100px"} alt={"infinite time icon"} src={'/images/infinite-time.webp'}/>
+                  </>
+                  :
+                  <>
+                    <h3 className={"text-muted"}>Valid for</h3>
+                    <ExpiryCountDown date={plan.expiryDate}/>
+                  </>
+                }
               </MDBContainer>
             </div>
             <MDBRow center className={"my-3"}>
@@ -70,8 +78,8 @@ class MemberPlanPage extends React.Component {
   }
 }
 
-export default graphql(MEMBER_PLAN_QUERY,{
-  options:{
-    fetchPolicy:"network-only"
+export default graphql(MEMBER_PLAN_QUERY, {
+  options: {
+    fetchPolicy: "network-only"
   }
 })(MemberPlanPage)
