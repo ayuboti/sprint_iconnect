@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import PaybillForm from "./PaybillForm";
 import TillNumberForm from "./TillNumberForm";
-import BankForm from "./BankForm";
+import BankPesaLinkForm from "./BankForm";
 import MobileForm from "./MobileForm";
 
 export default class PaymentDetailsSection extends React.PureComponent {
@@ -27,7 +27,7 @@ export default class PaymentDetailsSection extends React.PureComponent {
     if (channel === "till")
       return <TillNumberForm amount={amount}/>
     if (channel === "bank")
-      return <BankForm amount={amount}/>
+      return <BankPesaLinkForm amount={amount}/>
     if (channel === "phone")
       return <MobileForm amount={amount}/>
     return null

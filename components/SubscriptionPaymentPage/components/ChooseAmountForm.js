@@ -30,7 +30,7 @@ const ChooseAmountItem = props => {
           </MDBCol>
           <MDBCol size={"12"} md={"10"}>
             <MDBBtn
-              color={"mdb-color"}
+              color={"teal"}
               onClick={onSelect(interval, (price * number).toString())}
               className={"rounded-pill float-left w-100"}>
               <MDBIcon icon={"money-bill"} className={"mx-2"}/>

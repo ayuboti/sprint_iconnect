@@ -1,9 +1,11 @@
 import React, {PureComponent} from "react";
 import {MDBBtn, MDBCol, MDBInput, MDBRow} from 'mdbreact';
-import {MutationForm} from "../../Form";
+import {FormAlerts, MutationForm} from "../../Form";
 import PropTypes from "prop-types"
 import {WALLET_QUERY} from "../../WalletPage/queries";
 import {PAYBILL_WITHDRAW_MUTATION} from "../queries";
+import {format_errors} from "../../../_helpers";
+import {redirect} from "../../app/components";
 
 export default class PaybillForm extends PureComponent {
   constructor(props) {
@@ -20,12 +22,13 @@ export default class PaybillForm extends PureComponent {
     submitted: false
   }
 
-  completeHandler = ({withdraw: {transaction, errors}}) => {
+  completeHandler = ({withdrawPaybill: {transaction, errors}}) => {
     if (transaction) {
       // redirect to withdraw transaction page
+      redirect(`/member/transactions/wallet/${transaction.id}`)
       return
     }
-    this.setState({errors})
+    this.setState({errors:format_errors(errors)})
   }
 
   getFormData = () => {
@@ -40,7 +43,7 @@ export default class PaybillForm extends PureComponent {
   };
 
   render() {
-    const {submitted, errors, paybillNarration, paybillNumber} = this.state;
+    const {errors, paybillNarration, paybillNumber} = this.state;
     return (
       <>
         <div>
@@ -51,6 +54,7 @@ export default class PaybillForm extends PureComponent {
                             mutation={PAYBILL_WITHDRAW_MUTATION}
                             mutationOptions={this.mutationOptions}>
                 <div className={"p-3"}>
+                  <FormAlerts errors={errors.non_field_errors}/>
                   <MDBRow>
                     <MDBCol size={"12"}>
                       <MDBInput
@@ -63,8 +67,6 @@ export default class PaybillForm extends PureComponent {
                     </MDBCol>
                     <MDBCol size={"12"}>
                       <MDBInput
-                        type={"textarea"}
-                        rows={"2"}
                         label={"Account Number/ Reason For Payment"}
                         valueDefault={paybillNarration ? paybillNarration : ""}
                         onChange={e => {

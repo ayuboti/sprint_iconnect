@@ -1,9 +1,11 @@
 import React, {PureComponent} from "react";
 import {MDBBtn, MDBCol, MDBInput, MDBRow} from 'mdbreact';
-import {MutationForm} from "../../Form";
+import {FormAlerts, MutationForm} from "../../Form";
 import PropTypes from "prop-types"
 import {WALLET_QUERY} from "../../WalletPage/queries";
-import {TILL_WITHDRAW_MUTATION} from "../queries";
+import {PHONE_WITHDRAW_MUTATION} from "../queries";
+import {format_errors} from "../../../_helpers";
+import {redirect} from "../../app/components";
 
 export default class MobileForm extends PureComponent {
   constructor(props) {
@@ -18,12 +20,13 @@ export default class MobileForm extends PureComponent {
     submitted: false
   }
 
-  completeHandler = ({withdraw: {transaction, errors}}) => {
+  completeHandler = ({withdrawPhone: {transaction, errors}}) => {
     if (transaction) {
       // redirect to withdraw transaction page
+      redirect(`/member/transactions/wallet/${transaction.id}`)
       return
     }
-    this.setState({errors})
+    this.setState({errors:format_errors(errors)})
   }
 
   getFormData = () => {
@@ -46,9 +49,10 @@ export default class MobileForm extends PureComponent {
             <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
               <MutationForm data={this.getFormData()}
                             onCompleted={this.completeHandler}
-                            mutation={TILL_WITHDRAW_MUTATION}
+                            mutation={PHONE_WITHDRAW_MUTATION}
                             mutationOptions={this.mutationOptions}>
                 <div className={"p-3"}>
+                  <FormAlerts errors={errors.nonFieldErrors}/>
                   <MDBRow>
                     <MDBCol size={"12"}>
                       <MDBInput

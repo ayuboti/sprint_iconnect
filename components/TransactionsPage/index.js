@@ -36,7 +36,7 @@ class TransactionsPage extends React.PureComponent {
     if (loading) return <Loader/>
     if (error) return <ErrorPage message={error.message}/>
 
-    const subscriptionList = subscriptionTransactions.map(
+    const subscriptionList = subscriptionTransactions ?  subscriptionTransactions.map(
       ({mpesaCode, amount, phone, state, userSubscription: {subscription, email, name}}, key) => {
         let stateButton;
         if (state === "SUCCESS")
@@ -57,7 +57,7 @@ class TransactionsPage extends React.PureComponent {
           </tr>
         )
       }
-    )
+    ) : null
     return (
       <MDBContainer fluid className={"px-4"}>
         <h1>Transactions</h1>

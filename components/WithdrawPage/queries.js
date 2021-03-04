@@ -4,7 +4,7 @@ export const WITHDRAW_QUERY = gql`
     wallet{
       id
       balance
-    },
+    }
     paymentProfile{
       id
       phone
@@ -52,9 +52,10 @@ export const TILL_WITHDRAW_MUTATION = gql`
     }
   }
 `;
-export const WITHDRAW_PHONE_MUTATION = gql`
-  mutation WithdrawPhoneMutation($amount:Float!) {
-    withdrawPhone(amount:$amount){
+
+export const BANK_WITHDRAW_MUTATION = gql`
+  mutation WithdrawBankMutation($amount:Float!,$bankCode:String!,$bankAccount:String!,$bankNarration:String!) {
+    withdrawBank(amount:$amount,bankCode:$bankCode,bankAccount:$bankAccount,bankNarration:$bankNarration){
       transaction{
         id
         state
@@ -65,4 +66,19 @@ export const WITHDRAW_PHONE_MUTATION = gql`
       }
     }
   }
-`
+`;
+
+export const PHONE_WITHDRAW_MUTATION = gql`
+  mutation WithdrawPhoneMutation($amount:Float!,$phone:String!) {
+    withdrawPhone(amount:$amount,phone:$phone){
+      transaction{
+        id
+        state
+      }
+      errors{
+        field
+        errors
+      }
+    }
+  }
+`;

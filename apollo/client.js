@@ -8,6 +8,7 @@ import {initCache} from './lib/init-cache';
 import resolvers from "./resolvers";
 import types from "./types";
 import {GRAPHQL_ENDPOINT} from "../_constants";
+import router from "next/router";
 
 global.fetch = fetch;
 
@@ -35,23 +36,33 @@ export default function createApolloClient(initialState, ctx) {
         }
       }));
     }
+
     return forward(operation);
   });
 
-  // initialize error Link to handle Errors
-  const errorLink = onError(({networkError}) => {
-    if (Boolean(ctx)) {
-      if (networkError.statusCode === 408)
-        console.log("taken too long to respond")
+  const authErrorLink = onError(({networkError}) => {
+    if (!Boolean(ctx) && networkError) {
+        if (networkError.statusCode === 401) {
+          window.localStorage.removeItem('access_token')
+          router.reload()
+        }
     }
   });
 
+  batchHttpLink = authErrorLink.concat(batchHttpLink)
   // if in server environment
   if (Boolean(ctx)) {
+    // initialize error Link to handle Errors
+    const timeOutErrorLink = onError(({networkError}) => {
+      if (Boolean(ctx)) {
+        if (networkError.statusCode === 408)
+          console.log("taken too long to respond")
+      }
+    });
     // set the timeOut link
     const timeoutLink = new ApolloLinkTimeout(5000); // 5 second timeout
     // combine the batchHttpLink with the concat
-    batchHttpLink = errorLink.concat(timeoutLink.concat(batchHttpLink));
+    batchHttpLink = timeOutErrorLink.concat(timeoutLink.concat(batchHttpLink));
     console.info("batch link sent to the server");
   }
 

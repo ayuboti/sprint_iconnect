@@ -1,13 +1,11 @@
 import React, {PureComponent} from "react";
 import {MDBBtn, MDBCol, MDBInput, MDBRow} from 'mdbreact';
-import {FormAlerts, MutationForm} from "../../Form";
+import {MutationForm} from "../../Form";
 import PropTypes from "prop-types"
 import {WALLET_QUERY} from "../../WalletPage/queries";
-import {PAYBILL_WITHDRAW_MUTATION} from "../queries";
-import {redirect} from "../../app/components";
-import {format_errors} from "../../../_helpers";
+import {BANK_WITHDRAW_MUTATION} from "../queries";
 
-class BankForm extends PureComponent {
+export default class BankPesaLinkForm extends PureComponent {
   constructor(props) {
     super(props);
     const {paybillNumber, paybillNarration} = props;
@@ -16,19 +14,19 @@ class BankForm extends PureComponent {
   }
 
   state = {
-    paybillNumber: "",
-    paybillNarration: "",
+    bankAccount: "",
+    bankCode: "",
+    bankNarration: "",
     errors: {},
     submitted: false
   }
 
-  completeHandler = ({withdrawPaybill: {transaction, errors}}) => {
+  completeHandler = ({withdraw: {transaction, errors}}) => {
     if (transaction) {
       // redirect to withdraw transaction page
-      redirect(`/member/transactions/wallet/${transaction.id}`)
       return
     }
-    this.setState({errors:format_errors(errors)})
+    this.setState({errors})
   }
 
   getFormData = () => {
@@ -43,7 +41,7 @@ class BankForm extends PureComponent {
   };
 
   render() {
-    const {errors, paybillNarration, paybillNumber} = this.state;
+    const {submitted, errors, bankAccount, bankCode, bankNarration} = this.state;
     return (
       <>
         <div>
@@ -51,29 +49,39 @@ class BankForm extends PureComponent {
             <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
               <MutationForm data={this.getFormData()}
                             onCompleted={this.completeHandler}
-                            mutation={PAYBILL_WITHDRAW_MUTATION}
+                            mutation={BANK_WITHDRAW_MUTATION}
                             mutationOptions={this.mutationOptions}>
                 <div className={"p-3"}>
-                  <FormAlerts errors={errors.non_field_errors}/>
                   <MDBRow>
                     <MDBCol size={"12"}>
                       <MDBInput
-                        label={"Bank Paybill Number"}
+                        label={"Bank Code"}
                         required={true}
                         onChange={e => {
-                          this.setState({paybillNumber: e.target.value})
+                          this.setState({bankCode: e.target.value})
                         }}
-                        valueDefault={paybillNumber ? paybillNumber : ""}
+                        valueDefault={bankCode ? bankCode : ""}
                       />
                     </MDBCol>
                     <MDBCol size={"12"}>
                       <MDBInput
-                        type={"text"}
-                        required={true}
                         label={"Bank Account Number"}
-                        valueDefault={paybillNarration ? paybillNarration : ""}
+                        required={true}
                         onChange={e => {
-                          this.setState({paybillNarration: e.target.value})
+                          this.setState({bankAccount: e.target.value})
+                        }}
+                        valueDefault={bankAccount ? bankAccount : ""}
+                      />
+                    </MDBCol>
+                    <MDBCol size={"12"}>
+                      <MDBInput
+                        type={"textarea"}
+                        rows={"2"}
+                        required={true}
+                        label={"Reason for Payment"}
+                        valueDefault={bankNarration ? bankNarration : ""}
+                        onChange={e => {
+                          this.setState({bankNarration: e.target.value})
                         }}
                       />
                     </MDBCol>
@@ -93,10 +101,9 @@ class BankForm extends PureComponent {
   }
 }
 
-BankForm.propTypes = {
+BankPesaLinkForm.propTypes = {
   amount: PropTypes.number.isRequired,
-  paybillNumber: PropTypes.any,
-  paybillNarration: PropTypes.any
+  bankCode: PropTypes.any,
+  bankAccount: PropTypes.any,
+  bankNarration: PropTypes.any
 };
-
-export default BankForm
