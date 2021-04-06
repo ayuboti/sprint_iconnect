@@ -5,10 +5,10 @@ export const WALLET_QUERY = gql`
     wallet{
       id
       balance
-      transactions{
+      withdrawTransactions{
         id
         amount
-        transactionDate
+        createdAt
         transactionCost
         state       
       }

@@ -15,8 +15,8 @@ export default class MobileForm extends PureComponent {
   }
 
   state = {
-    phone: "",
-    errors: {},
+    phone: "+254",
+    errors: [],
     submitted: false
   }
 
@@ -26,7 +26,7 @@ export default class MobileForm extends PureComponent {
       redirect(`/member/transactions/wallet/${transaction.id}`)
       return
     }
-    this.setState({errors:format_errors(errors)})
+    this.setState({errors: format_errors(errors)})
   }
 
   getFormData = () => {
@@ -40,8 +40,35 @@ export default class MobileForm extends PureComponent {
     refetchQueries: [{query: WALLET_QUERY}]
   };
 
+  phoneChangeHandler = ({target: {value}}) => {
+    if (this.isValidPhone(value)) {
+      this.setState({phone: value, errors: []});
+      return;
+    }
+    this.setState({phone: value, errors: ['Invalid Phone Number']});
+  }
+
+  isValidPhone = (phone) => {
+    const pattern = /^\+254(?:[0-9] ?){8,11}[0-9]$/;
+    return Boolean(pattern.test(phone));
+  }
+
   render() {
-    const {errors, phone} = this.state;
+    let {errors, phone} = this.state;
+    if (!errors.length && !this.isValidPhone(phone))
+      errors = errors.concat(['Invalid Phone Number'])
+
+    const inputErrors = errors.map(
+      (error, key) => (
+        <div key={key} className="invalid-feedback">
+          {error}
+        </div>
+      )
+    )
+    const invalidClass = errors.length && phone ? "is-invalid" : "";
+    const validClass = !errors.length && phone ? "is-valid" : "";
+
+
     return (
       <>
         <div>
@@ -56,16 +83,19 @@ export default class MobileForm extends PureComponent {
                   <MDBRow>
                     <MDBCol size={"12"}>
                       <MDBInput
+                        required
                         label={"Phone Number e.g +254XXXXXXXXX"}
-                        onChange={e => {
-                          this.setState({phone: e.target.value})
-                        }}
-                        valueDefault={phone ? phone : ""}
-                      />
+                        onChange={this.phoneChangeHandler}
+                        className={validClass + " " + invalidClass}
+                        valueDefault={phone ? phone : ""}>
+                        {inputErrors}
+                        <div className={"valid-feedback"}>Valid Phone Number!!</div>
+                      </MDBInput>
                     </MDBCol>
                   </MDBRow>
                   <div className="text-center">
-                    <MDBBtn type="submit" outline color={"cyan accent-1"} className={"rounded-pill "}>
+                    <MDBBtn type="submit" outline color={"cyan accent-1"}
+                            className={"rounded-pill "}>
                       Submit
                     </MDBBtn>
                   </div>

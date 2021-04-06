@@ -69,8 +69,8 @@ class WalletPage extends React.PureComponent {
                   </MDBTableHead>
                   <MDBTableBody>
                     {
-                      wallet.transactions.map(
-                        ({id, amount, transactionDate, transactionCost, state}, key) => {
+                      wallet.withdrawTransactions.map(
+                        ({id, amount, createdAt, transactionCost, state}, key) => {
                           let stateButton;
                           let transactionDateStr;
                           transactionDateStr = new Intl.DateTimeFormat("en-US", {
@@ -81,7 +81,7 @@ class WalletPage extends React.PureComponent {
                             hour12: true,
                             hour: "numeric",
                             minute: "numeric"
-                          }).format(new Date(transactionDate));
+                          }).format(new Date(createdAt));
 
                           if (state === "REQUESTED")
                             stateButton = <MDBBtn size={"sm"} color={"white darken-4"}>Requested</MDBBtn>

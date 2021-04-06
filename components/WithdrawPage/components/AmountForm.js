@@ -32,7 +32,7 @@ export class AmountForm extends PureComponent {
                 containerClass={"text-cyan"}
                 type={"number"}
                 max={availableAmount}
-                min={"100"}
+                min={"10"}
                 label={"Amount(KES)"}
                 initial={amount ? amount : availableAmount}
                 onChange={e => {

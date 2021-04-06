@@ -8,3 +8,12 @@ export const WITHDRAW_TRANSACTION_QUERY = gql`
     }
   }
 `;
+
+export const WITHDRAW_TRANSACTION_STATUS_QUERY = gql`
+  query WithdrawTransactionStatusQuery($transactionId:ID!){
+    withdrawTransactionStatus(transactionId:$transactionId){
+      id
+      state
+    }
+  }
+`;
