@@ -4,7 +4,7 @@ import {NextSeo} from 'next-seo';
 
 class PrivacyPolicy extends React.PureComponent {
   render() {
-    const name = "M-Subscribe"
+    const name = "Sprint-I-Connect"
     return (
       <>
         <NextSeo

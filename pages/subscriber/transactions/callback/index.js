@@ -13,7 +13,7 @@ class CallbackPage extends React.PureComponent {
   sendCallback = async () => {
     const {router} = this.props;
     const data = router.query
-    return await fetch(`${API_URL}/ipay/subscription-callback`, {
+    return await fetch(`${API_URL}/payments/subscription-callback`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached

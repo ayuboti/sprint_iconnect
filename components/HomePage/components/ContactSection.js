@@ -36,7 +36,7 @@ export default class ContactSection extends React.PureComponent {
                 <MDBInput type={"email"} label={"E-mail"}/>
                 <MDBInput label={"Subject"}/>
                 <MDBInput type={"textarea"} label={"How we can help ?"}/>
-                <MDBBtn className={"rounded-pill"}>
+                <MDBBtn className={"rounded-pill"} color={"primary"}>
                   Submit
                   <MDBIcon far icon={"paper-plane"} className={"mx-2"}/>
                 </MDBBtn>

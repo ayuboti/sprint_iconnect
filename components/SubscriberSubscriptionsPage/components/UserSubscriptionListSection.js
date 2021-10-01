@@ -40,7 +40,7 @@ class UserSubscriptionListSection extends React.PureComponent {
                   <SubscriptionCard title={'Add Subscription'}>
                     <div className={"w-100 text-center"}>
                       <Link href={'/subscriber/subscriptions/add'} as={`/subscriber/subscriptions/add`}>
-                        <a className={"btn btn-default rounded-pill mt-3 mb-1"}>
+                        <a className={"btn btn-primary rounded-pill mt-3 mb-1"}>
                           <MDBIcon icon={"plus"} size={"lg"}/>
                         </a>
                       </Link>

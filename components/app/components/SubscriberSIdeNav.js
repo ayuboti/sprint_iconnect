@@ -25,12 +25,6 @@ const SideNavChildren = props => {
           <MDBIcon icon={"plus"} className={"mr-2"}/>
           Add Subscription
         </SideNavItem>
-        <SideNavItem pathname={pathname}
-                     className={className}
-                     href={`/subscriber/payment-guide`}>
-          <MDBIcon icon={"book-open"} className={"mr-2"}/>
-          Payment Guide
-        </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/subscriber/account"}>
           <MDBIcon far icon={"user"} className={"mr-2"}/>
           My Account

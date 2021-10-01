@@ -10,8 +10,7 @@ import TeamSection from "./components/TeamSection";
 
 class HomePage extends PureComponent {
   render() {
-    const description = " M-Subscribe is a platform bridges customer and businesses by giving businesses the ability to give their"+
-    "customers the power to manage their subscriptions from anywhere."
+    const description = "Sprint Wi-Fi manager is a Wi-Fi management system that helps the user and provider of Sprint Iconnect ltd to easily access and perform Wi-Fi functions at one point. "
     return (
       <>
         <NextSeo
@@ -21,7 +20,7 @@ class HomePage extends PureComponent {
           <div style={{height: "67px"}}/>
           <MDBContainer>
             <div className="text-left">
-              <h1 className={"text-center"}>M-Subscribe</h1>
+              <h1 className={"text-center"}>Sprint I Connect</h1>
               <p style={{fontSize: "1.1rem"}} className={'text-center'}>
                 {description}
               </p>
@@ -31,8 +30,8 @@ class HomePage extends PureComponent {
               <MDBCol size={"12"} md={'6'} className={"text-center border-right border-left border-white"}>
                 <Link href={"/member"}>
                   <a>
-                    <MDBBtn tag={"span"} color={"teal"} size={"lg"} className={"rounded-pill"}>
-                      subscription owner
+                    <MDBBtn tag={"span"} color={"light-blue"} size={"lg"} className={"rounded-pill"}>
+                       Internet Provider
                     </MDBBtn>
                   </a>
                 </Link>
@@ -40,8 +39,8 @@ class HomePage extends PureComponent {
               <MDBCol size={"12"} md={'6'} className={"text-center border-right border-left border-white"}>
                 <Link href={"/subscriber"}>
                   <a>
-                    <MDBBtn tag={"span"} color={"teal"} size={"lg"} className={"rounded-pill"}>
-                      subscriber
+                    <MDBBtn tag={"span"} color={"light-blue"} size={"lg"} className={"rounded-pill"}>
+                      Customer
                     </MDBBtn>
                   </a>
                 </Link>
@@ -52,7 +51,6 @@ class HomePage extends PureComponent {
         <FeatureSection/>
         <PricingSection/>
         <ContactSection/>
-        <TeamSection/>
       </>
     )
   }

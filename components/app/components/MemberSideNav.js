@@ -46,7 +46,7 @@ export const SidenavLogout = (props) => {
   };
 
   return (
-    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} cyan darken-4 text-white mt-5`} onClick={onClick}>
+    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} blue  darken-4 text-white mt-5`} onClick={onClick}>
       {children}
     </MDBListGroupItem>
   )
@@ -103,7 +103,7 @@ export const NavSmall = ({toggleFunction}) => {
 
   return (
     <>
-      <MDBNavbar light sticky={"top"} className={"d-md-block d-lg-none z-depth-1 bg-white"}>
+      <MDBNavbar dark sticky={"top"} className={"d-md-block d-lg-none z-depth-1 bg-primary"} >
         <MDBNavbarNav left>
           <MDBNavItem>
             <MDBNavbarToggler onClick={toggleFunction}/>

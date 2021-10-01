@@ -23,7 +23,7 @@ export default class FeatureSection extends React.PureComponent {
                   </p>
                 </div>
                 <div className="col-md-4 col-lg-4 d-flex justify-content-center mb-md-0 mb-5">
-                  <MDBIcon icon="stopwatch" className={"teal-text"} size={"10x"}/>
+                  <MDBIcon icon="stopwatch" className={"blue-text"} size={"10x"}/>
                 </div>
               </div>
             </div>
@@ -32,7 +32,7 @@ export default class FeatureSection extends React.PureComponent {
                 <MDBAnimation type={"fadeInLeft"} className={'h-100'}>
                   <div className={"z-depth-1-half p-3 h-100"} style={{borderRadius: "1rem"}}>
                     <h4 className="font-weight-lighter mb-3 text-center">
-                      <MDBIcon fab icon={"google"} className={"teal-text pr-2 float-left"}/>
+                      <MDBIcon fab icon={"google"} className={"blue-text pr-2 float-left"}/>
                       Google Login
                     </h4>
                     <p className="text-muted mb-lg-0 pl-2">
@@ -45,7 +45,7 @@ export default class FeatureSection extends React.PureComponent {
                 <MDBAnimation type={"fadeInUp"} className={'h-100'}>
                   <div className={"z-depth-2 p-3 h-100"} style={{borderRadius: "1rem"}}>
                     <h4 className="font-weight-lighter mb-3 text-center">
-                      <MDBIcon icon="shield-alt" className={"teal-text pr-2 float-left"}/>
+                      <MDBIcon icon="shield-alt" className={"blue-text pr-2 float-left"}/>
                       Secure Withdrawal
                     </h4>
                     <p className="text-muted mb-lg-0 pl-2">
@@ -59,7 +59,7 @@ export default class FeatureSection extends React.PureComponent {
                 <MDBAnimation type={"fadeInRight"} className={'h-100'}>
                   <div className={"z-depth-1-half p-3 h-100"} style={{borderRadius: "1rem"}}>
                     <h4 className="font-weight-lighter mb-3 text-center">
-                      <MDBIcon icon="mobile-alt" className={"teal-text pr-2 float-left"}/>
+                      <MDBIcon icon="mobile-alt" className={"blue-text pr-2 float-left"}/>
                       Mobile Withdrawal
                     </h4>
                     <p className="text-muted mb-md-0 pl-2">

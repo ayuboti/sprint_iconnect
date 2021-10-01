@@ -93,7 +93,7 @@ class ProfilePage extends React.PureComponent {
                 </MDBCol>
                 <MDBCol size={"12"}/>
                 <MDBCol size={"6"} className={"text-center my-4"}>
-                  <MDBBtn type={"submit"} className={"rounded-pill"}>SUBMIT</MDBBtn>
+                  <MDBBtn type={"submit"} className={"rounded-pill"} color={"primary"}>SUBMIT</MDBBtn>
                 </MDBCol>
               </MDBRow>
             </MutationForm>

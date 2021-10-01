@@ -63,12 +63,14 @@ class SubscriptionsPage extends React.PureComponent {
         <form onSubmit={this.submitHandler}>
           <MDBRow>
             <MDBCol size={"12"} md={"8"}>
-              <MDBInput label={"Search for a subscription"} group required
-                        value={this.state.query}
-                        onChange={this.changeHandler}/>
+              <MDBInput
+                label={"Search for a subscription"}
+                group required
+                value={this.state.query}
+                onChange={this.changeHandler}/>
             </MDBCol>
             <MDBCol size={"12"} md={"4"} className={"text-center"}>
-              <MDBBtn type={"submit"} className={"rounded-pill"} outline>
+              <MDBBtn color={"primary"} type={"submit"} className={"rounded-pill"} outline>
                 <MDBIcon icon={'search'} className={"mx-2"}/>
                 SEARCH
               </MDBBtn>

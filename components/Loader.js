@@ -13,7 +13,7 @@ export default class Loader extends React.PureComponent {
       };
     return <MDBProgress
       preloader
-      barClassName={"cyan darken-4"}
+      barClassName={"blue darken-4"}
       material
       wrapperStyle={style}/>
   }

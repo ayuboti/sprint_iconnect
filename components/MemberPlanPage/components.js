@@ -30,7 +30,7 @@ export const MemberPlanPricing = ({plan, price, commission, children}) => {
         </ol>
         <Link href={"/member/account/member-plan/[plan]"} as={`/member/account/member-plan/${plan}`}>
           <a>
-            <MDBBtn className={"rounded-pill"}>
+            <MDBBtn color={"primary"} className={"rounded-pill"}>
               Switch Now
             </MDBBtn>
           </a>

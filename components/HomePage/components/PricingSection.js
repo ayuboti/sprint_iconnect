@@ -14,7 +14,7 @@ export default class PricingSection extends React.PureComponent {
                 <MDBCard className="z-depth-1 bordered border-light">
                   <MDBCardBody className="p-0">
                     <MDBRow className="mx-0">
-                      <MDBCol md={"8"} className="rgba-teal-slight rounded-left pt-4">
+                      <MDBCol md={"8"} className="rgba-blue-slight rounded-left pt-4">
                         <h3>Free</h3>
                         <p className="font-weight-light text-muted mb-4">
                           With our free plan you get to enjoy all the benefits that come with being an M-Subscribe
@@ -33,7 +33,7 @@ export default class PricingSection extends React.PureComponent {
                 <MDBCard className="z-depth-2 bordered border-light">
                   <MDBCardBody className="p-0">
                     <MDBRow className="mx-0">
-                      <MDBCol md={"8"} className="rgba-teal-slight rounded-left pt-4">
+                      <MDBCol md={"8"} className="rgba-blue-slight rounded-left pt-4">
                         <h3>Basic</h3>
                         <p className="font-weight-light text-muted mb-4">
                           With this plan you get access to paybill integration not withstanding the lower
@@ -52,7 +52,7 @@ export default class PricingSection extends React.PureComponent {
                 <MDBCard className="z-depth-1-half bordered border-light">
                   <MDBCardBody className="p-0">
                     <MDBRow className="mx-0">
-                      <MDBCol md={"8"} className="rgba-teal-slight rounded-left pt-4">
+                      <MDBCol md={"8"} className="rgba-blue-slight rounded-left pt-4">
                         <h3>Premium</h3>
                         <p className="font-weight-light text-muted mb-4">
                           Enjoy full time support and free social media consultation as we help you gain more

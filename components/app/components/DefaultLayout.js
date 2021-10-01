@@ -40,9 +40,9 @@ class DefaultLayout extends PureComponent {
     const {active} = this.state
     return (
       <>
-        <MDBNavbar dark fixed={"top"} color={"rgba-teal-strong"} expand="md">
+        <MDBNavbar dark fixed={"top"} color={"rgba-blue-strong"} expand="md">
           <MDBNavbarBrand>
-            <strong className="white-text">M-Subscribe</strong>
+            <strong className="white-text">Sprint-I-Connect</strong>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse}/>
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
@@ -58,9 +58,6 @@ class DefaultLayout extends PureComponent {
               </MDBNavItem>
               <MDBNavItem active={"contact" === active} onClick={() => this.setState({active: 'contact'})}>
                 <NavLink href="/#contact-us">Contact Us</NavLink>
-              </MDBNavItem>
-              <MDBNavItem active={"team" === active} onClick={() => this.setState({active: 'contact'})}>
-                <NavLink href="/#our-team">Our Team</NavLink>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>

@@ -69,7 +69,7 @@ class TransactionsPage extends React.PureComponent {
                         onChange={this.changeHandler}/>
             </MDBCol>
             <MDBCol size={"12"} md={"4"} className={"text-center"}>
-              <MDBBtn type={"submit"} className={"rounded-pill"} outline>
+              <MDBBtn type={"submit"} color={'primary'} className={"rounded-pill"} outline>
                 <MDBIcon icon={'search'} className={"mx-2"}/>
                 SEARCH
               </MDBBtn>

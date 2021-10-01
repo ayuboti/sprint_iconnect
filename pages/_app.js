@@ -17,12 +17,8 @@ function App({Component, pageProps}) {
               crossOrigin="anonymous"/>
       </Head>
       <DefaultSeo
-        title={"M-Subscribe"}
-        titleTemplate={" %s | M-Subscribe"}
-        description={
-          "M-Subscribe is an application that connect buyers and sellers by providing to them " +
-          "a medium where sellers can access services at micro installments"
-        }
+        title={"Sprint-I-Connect"}
+        titleTemplate={" %s | Sprint-I-Connect"}
       />
       <Component {...pageProps} />
     </>

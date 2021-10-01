@@ -46,7 +46,7 @@ class WalletPage extends React.PureComponent {
                     <MDBCol size={"12"} className={"text-center"}>
                       <Link href={"/member/wallet/withdraw"}>
                         <a>
-                          <MDBBtn size={"lg"} className={"rounded-pill my-3 w-auto"} onClick={this.toggle}>
+                          <MDBBtn color={'primary'} size={"lg"} className={"rounded-pill my-3 w-auto"} onClick={this.toggle}>
                             <MDBIcon icon={"cash-register"} className={"mx-4"} size={"1x"}/>
                             WITHDRAW
                           </MDBBtn>

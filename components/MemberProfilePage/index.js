@@ -82,7 +82,7 @@ class MemberProfilePage extends React.PureComponent {
               </MDBCol>
               <MDBCol size={"12"}/>
               <MDBCol size={"6"} className={"text-center"}>
-                <MDBBtn type={"submit"} size={"lg"} className={"rounded-pill"}>
+                <MDBBtn type={"submit"} size={"lg"} color={"primary"} className={"rounded-pill"}>
                   SUBMIT
                 </MDBBtn>
               </MDBCol>

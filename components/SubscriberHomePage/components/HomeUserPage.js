@@ -24,7 +24,7 @@ class HomeUserPage extends React.Component {
                                     width: "100%"
                                   }}/>
                   </MDBCard>
-                  <div className={`mask flex-center rgba-teal-light`}>
+                  <div className={`mask flex-center rgba-blue-light`}>
                     <Link href={'/subscriber/subscriptions'}>
                       <a>
                         <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"}>
@@ -49,7 +49,7 @@ class HomeUserPage extends React.Component {
                                     width: "100%"
                                   }}/>
                   </MDBCard>
-                  <div className={`mask flex-center rgba-teal-light`}>
+                  <div className={`mask flex-center rgba-blue-light`}>
                     <Link href={'/subscriber/account'}>
                       <a>
                         <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"}>
