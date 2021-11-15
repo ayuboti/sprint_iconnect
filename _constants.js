@@ -7,9 +7,7 @@ export const make_url = (domain, protocol = 'http', secure = false) => {
   return `${reqProtocol}://${domain}`
 }
 
-const API_DOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN
-
-export const API_URL = make_url(API_DOMAIN, 'http', false);
+export const API_URL = process.env.NEXT_PUBLIC_API_DOMAIN
 
 export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
 
