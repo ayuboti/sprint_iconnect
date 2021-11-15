@@ -20,7 +20,7 @@ class HomePage extends PureComponent {
           <div style={{height: "67px"}}/>
           <MDBContainer>
             <div className="text-left">
-              <h1 className={"text-center"}>Sprint I Connect</h1>
+              <h1 className={"text-center"}>Sprint IConnect</h1>
               <p style={{fontSize: "1.1rem"}} className={'text-center'}>
                 {description}
               </p>

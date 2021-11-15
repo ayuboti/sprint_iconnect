@@ -19,7 +19,7 @@ export default class TeamSection extends React.PureComponent {
                     />
                   </div>
                   <div className="text-center mt-3">
-                    <h6 className="font-weight-bold pt-2">Daniel Waruo King'ang'ai</h6>
+                    <h6 className="font-weight-bold pt-2">Ayub Otieno</h6>
                     <p className="text-muted">
                       <small>
                         <i>

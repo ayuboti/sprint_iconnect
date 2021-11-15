@@ -9,7 +9,7 @@ export const make_url = (domain, protocol = 'http', secure = false) => {
 
 const API_DOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN
 
-export const API_URL = make_url(API_DOMAIN, 'http', !dev);
+export const API_URL = make_url(API_DOMAIN, 'http', false);
 
 export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
 

@@ -17,6 +17,12 @@ const SideNavChildren = props => {
           <MDBIcon icon={"home"} className={"mr-2"}/>
           Home
         </SideNavItem>
+        <SideNavItem pathname={pathname}
+                     className={className}
+                     href={`/speed-test`}>
+          <MDBIcon icon={"bolt"} className={"mr-2"}/>
+          Speed Test
+        </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/subscriber/subscriptions"}>
           <MDBIcon icon={"file-contract"} className={"mr-2"}/>
           My Subscriptions
@@ -74,7 +80,8 @@ const SubscriberSIdeNav = props => {
   }
   return (
     <>
-      <SideNav hide={"lg"} isOpen={isOpen} toggleFunction={toggleFunction} className={"bg-white text-black z-depth-1"}>
+      <SideNav hide={"lg"} isOpen={isOpen} toggleFunction={toggleFunction}
+               className={"bg-white text-black z-depth-1"}>
         <MDBListGroup className={"px-1"}>
           <UserImage name={name} imageUrl={imageUrl}/>
           <SideNavChildren className={listClassSide} user={user}/>

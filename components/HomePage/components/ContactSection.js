@@ -17,11 +17,11 @@ export default class ContactSection extends React.PureComponent {
                 </p>
                 <p>
                   <span className="font-weight-bold mr-2">Email:</span>
-                  <a href="mailto:msubscribe2020@gmail.com">msubscribe2020@gmail.com</a>
+                  <a href="mailto:sprinticonnectman@gmail.com">sprinticonnectman@gmail.com</a>
                 </p>
                 <p>
                   <span className="font-weight-bold mr-2">Phone:</span>
-                  <a href="tel:+254797792447">+254 797 792 447</a>
+                  <a href="tel:+254729377683">+254729377683</a>
                 </p>
               </MDBCol>
               <MDBCol lg={"7"} md={"12"} className="mb-4 mb-md-0 text-center">

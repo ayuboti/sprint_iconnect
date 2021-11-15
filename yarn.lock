@@ -7206,6 +7206,11 @@ react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-messenger-chat-plugin@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-messenger-chat-plugin/-/react-messenger-chat-plugin-1.0.9.tgz#f770f57959787788c382d1d9c3fff2964324aac6"
+  integrity sha512-fiY3lue6DbY1FAuCtCAQnoOvlcoK6tR215KlpI8Xlx18PQG/dDtls3OvkWCZmya+bMdTk+nZ9mzI1SbJrdBYmQ==
+
 react-modal@^3.8.1:
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.11.2.tgz#bad911976d4add31aa30dba8a41d11e21c4ac8a4"

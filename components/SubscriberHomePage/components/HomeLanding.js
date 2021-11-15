@@ -14,7 +14,7 @@ class HomeLanding extends React.PureComponent {
           </MDBCardTitle>
           <p className="mx-5 mb-5">
             We help you get rewarded for being a loyal customer by giving the ability to subscribe
-            to your local businesses,
+            to your local Wi-Fi Network,Air Your feedback easily and make payments by just a tap.
           </p>
           <Link href={"/subscriber/login"} as={"/subscriber/login"}>
             <a>
